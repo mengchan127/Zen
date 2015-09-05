@@ -1,0 +1,28 @@
+---
+layout: default
+logoBgClass: blog-logo-bg
+logoClass: blog-logo
+---
+<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+		{% include yugen.html %}
+		{% include nav.html %}
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			{{ content }}
+		</div>
+	<!-- comment -->
+		{% if page.isDisqus %}
+			<div class="comment-wrap">
+			{% include disqus.html %}
+				{% if page.isRecentComment %}
+					{% include recent_comment.html %}
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+</div>
+<script src="{{ site.url }}js/scroll.js"></script>
