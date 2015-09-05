@@ -17,7 +17,7 @@ navClass: nav
 	<div class="pannel-box">
 		<span class="pub-date">发表于 {{ rpost.date | date_to_utc | date: "%Y年%m月%d日" }}</span>
 		<a href="{{ rpost.url }}" class="read-more" title="查看全文">More</a>
-		<span class="view-count">(30人已阅)</span>
+		<!-- <span class="view-count">(30人已阅)</span> -->
 	</div>
 </article>
 {% endfor %}

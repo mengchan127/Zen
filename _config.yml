@@ -22,14 +22,13 @@ unpublished:  false
 
 # Conversion
 markdown:     kramdown
-highlighter:  pygments
 lsi:          false
 excerpt_separator: "\n\n"
 
 # Serving
 detach:       false
 port:         4000
-host:         127.0.0.1
+host:         http://sally127.github.io/Zen/
 baseurl:      "" # does not include hostname
 
 # Outputting
@@ -42,8 +41,7 @@ timezone:      null
 title: 梦禅
 subTitle: 荣枯事过都成梦,悲喜不惊便是禅
 description: 你好,我是梦禅
-url: /
-feed: /atom.xml
+url: http://sally127.github.io/Zen/
 
 #菜单配置
 nav:
@@ -56,13 +54,6 @@ nav:
   - text: 关于
     url: /about.html
 
-
-#配置你喜欢的顶部背景图片---weiyong
-headimg:
-  - item: /themes/violet/images/hdbg01.jpg
-  - item: /themes/violet/images/hdbg02.jpg
-  - item: /themes/violet/images/hdbg03.jpg
-  - item: /themes/violet/images/hdbg04.jpg
 
 #contact me
 follow:
@@ -82,7 +73,7 @@ follow:
 #作者信息
 author:
   name: 梦 禅
-  link: http://www.zhanxin.info/contact.html
+  link: http://sally127.github.io/Zen/about.html
   motto: 荣枯事过都成梦，悲喜不惊便是禅
 #个人介绍
 introduce: 

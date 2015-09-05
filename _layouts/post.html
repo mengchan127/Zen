@@ -12,16 +12,12 @@ isRecentComment: true
 		{% for tag in page.tags %}
 		<a href="{{ site.url }}/all?tag={{ tag }}" class="tag">{{ tag }}</a>
 		{% endfor %}
-		<span>(30人阅)</span>
+		<!-- <span>(30人阅)</span> -->
 		<span><time pubdate="{{ rpost.date | date_to_utc | date: '%Y-%m-%d' }}">{{ page.date | date_to_utc | date: "%Y-%m-%d" }}</time></span>
 	</div>
 	<div class="markdown art-content">
 		{{ content }}
 	</div>
 </div>
-<!-- <div class="comment-wrap">
-{% include disqus.html %}
-{% include recent_comment.html %}
-</div> -->
 		
 
