@@ -46,13 +46,13 @@ url: http://sally127.github.io/Zen/
 #菜单配置
 nav:
   - text: 首页
-    url: /index.html
+    url: index.html
   - text: 文章
-    url: /blog
+    url: blog
   - text: 作品
-    url: /works.html
+    url: works.html
   - text: 关于
-    url: /about.html
+    url: about.html
 
 
 #contact me
