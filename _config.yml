@@ -28,8 +28,7 @@ excerpt_separator: "\n\n"
 # Serving
 detach:       false
 port:         4000
-host:         http://sally127.github.io/Zen/
-baseurl:      "" # does not include hostname
+baseurl:      "/Zen" 
 
 # Outputting
 permalink:     date
@@ -68,7 +67,7 @@ follow:
     url: mailto:liulying@126.com
   - class: fa-rss
     text: 订阅
-    url: http://www.mousycoder.com/rss/
+    url: 
 
 #作者信息
 author:
