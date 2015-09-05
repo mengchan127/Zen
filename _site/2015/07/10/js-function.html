@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			为function添加值为function的属性
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">为function添加值为function的属性</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=javascript" class="tag">javascript</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-07-10</time></span>
+	</div>
+	<div class="markdown art-content">
+		<p>今天在某个js交流群里看到这样一个问题：</p>
+
+<blockquote>
+  <p>亲们，如果我定义一个<code>function A() { }</code> 可以给这个函数添加一个方法吗？例如：<code>A.use = function() { }</code></p>
+</blockquote>
+
+<p>我回答说“可以，js里<code>function</code> 是对象”，但再往深一点想，对这个问题还真有点模糊，果断验证一下~</p>
+
+<p>先说下答案：<strong>这种写法是可以的</strong>。</p>
+
+<hr />
+
+<p>理论上来说，js里function是对象，给对象添加属性是可以的。但这样的函数执行是怎样的呢？两个函数有什么联系呢？</p>
+
+<pre><code>function A() {
+    console.log('I am A');
+}
+
+A.use = function () {
+    console.log('123');
+};
+
+A(); // I am A
+A.use(); // 123
+</code></pre>
+
+<p>运行结果可知，这两个函数在运行的时候并没有什么相互的影响，也体现了函数名就是个引用，<code>A</code> 和 <code>A.use</code> 是两个不同的引用，运行的时候指向不同的内存区域，所以没有影响。</p>
+
+<p>上面的代码改为：</p>
+
+<pre><code>var A = function() {
+    console.log('I am A');
+}
+
+A.use = function () {
+    console.log('123');
+};
+
+A(); // I am A
+A.use(); // 123
+</code></pre>
+<p>用函数表达式来定义A( )，这样是不是就明显多了，或者说习惯多了</p>
+
+<hr />
+
+<p>上面的结果表明两个函数运行时互不影响，但是真的一点关系都没有吗？想起前几天总结的<code>this</code>，就好奇地验证了下这两个函数的<code>this</code>是什么。</p>
+
+<pre><code>function A() {
+    console.log(this);
+}
+
+A.use = function () {
+    console.log(this);
+};
+
+A(); // Window
+A.use(); // function A()
+</code></pre>
+
+<p>A.use()中的this是<code>function A()</code>，这也符合this的使用规则:</p>
+
+<blockquote>
+  <p>函数作为对象的方法调用时，this指向这个对象。</p>
+</blockquote>
+
+<p>只不过在这里，这个对象是个函数而已。</p>
+
+<hr />
+
+<p>我在写<a href="http://segmentfault.com/a/1190000002867132">《JavaScript原型》</a>里面摘抄过下面这段：</p>
+
+<p>在jQuery源码中，“jQuery”或者“$”，这个变量其实是一个函数，可以用 <code>typeof</code> 验证一下。</p>
+
+<pre><code>console.log(typeof $);  // function
+console.log($.trim(" ABC ")); // ABC
+</code></pre>
+
+<p>验明正身！“$”的确是个函数。而经常使用的 $.trim() 也是个函数。</p>
+
+<p>很明显，这就是在 $ 或者 jQuery 函数上加了一个 trim 属性，属性值是函数，作用是截取前后空格。</p>
+
+<p>要习惯的把js中的一切看作对象，只要是对象，就是属性的集合，属性是键值对的形式。</p>
+
+<p>当时只是记住了可以这样写，今天算是真的明白了 ：）</p>
+
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

@@ -1,0 +1,72 @@
+---
+layout: main
+title: 作品
+navClass: works-nav
+isDisqus: true
+isRecentComment: false
+demos: 
+  - name: ToDo应用
+    img: todo.png
+    url: http://sally127.github.io/gallery/task3/index.html
+    description: 百度前端学院任务三，单页应用ToDo，主要使用 <span>LocalStorage</span> 存储 <span>JSON</span> 数据。
+    src: https://github.com/sally127/bd-ife-mycode/tree/master/task0003
+  - name: 个人博客
+    img: bd-blog.png
+    url: http://sally127.github.io/gallery/index.html
+    description: 百度前端学院任务一，根据所给设计稿，使用 <span>HTML</span>、 <span>CSS</span> 完成个人博客的静态布局。
+    src: https://github.com/sally127/bd-ife-mycode/tree/master/task0001
+  - name: 倒计时器
+    img: djs.png
+    url: http://sally127.github.io/gallery/task2/task0002_2.html
+    description: 原生 <span>js</span> 实现倒计时器，主要是 <span>Date</span> 对象和 <span>setInterval( )</span> 的使用。
+    src: https://github.com/sally127/bd-ife-mycode/blob/master/task0002/task0002_2.html
+  - name: 输入框操作
+    img: srk.png
+    url: http://sally127.github.io/gallery/task2/task0002_1.html
+    description: 根据用户输入的兴趣爱好，生成 checkbox ，主要使用 <span>正则表达式</span>以及 <span>DOM操作</span>。 
+    src: https://github.com/sally127/bd-ife-mycode/blob/master/task0002/task0002_1.html
+  - name: 轮播图
+    img: lbt.png
+    url: http://sally127.github.io/gallery/task2/task0002_3.html
+    description: 原生 <span>js</span> 实现轮播图效果，主要使用 <span>事件</span> 、<span>js实现切换动画</span> 和 <span>setTimeout( )</span>。
+    src: https://github.com/sally127/bd-ife-mycode/blob/master/task0002/task0002_3.html
+  - name: 输入提示框
+    img: tsk.png
+    url: http://sally127.github.io/gallery/task2/task0002_4.html
+    description: 模拟百度搜索框的输入提示的功能，主要使用 <span>事件监听</span> 、<span>正则匹配</span>、 <span>DOM操作</span>。
+    src: https://github.com/sally127/bd-ife-mycode/blob/master/task0002/task0002_4.html
+  - name: 界面拖拽交互
+    img: tz.png
+    url: http://sally127.github.io/gallery/task2/task0002_5.html
+    description: 原生 <span>js</span> 实现鼠标拖拽效果，主要使用 <span>鼠标事件</span>、 <span>绝对定位</span> 以及 <span>事件对象属性</span>。
+    src: https://github.com/sally127/bd-ife-mycode/blob/master/task0002/task0002_5.html
+  - name: 知识笔记
+    img: zsbj.png
+    url: http://sally127.github.io/ifesummer/
+    description: 单页应用，使用 <span>jQuery</span>、 <span>localStorage</span>、 <span>flex布局</span>，支持 <span>markdown解析</span>。
+    src: https://github.com/sally127/ifesummer
+  - name: 移动TO-DO简易版
+    img: todo-m.png
+    url: http://sally127.github.io/gallery/task4/index.html
+    description: 百度前端学院任务三移动版，了解 <span>移动端web开发</span>。
+    src: https://github.com/sally127/bd-ife-mycode/tree/master/task0004
+---
+
+<div class="works-wrap">
+	<h2>初学前端做的一些 Demo（原生JS）</h2>
+	<ul>
+	{% for demo in page.demos %}
+		<li class="work">
+			<a href="{{ demo.url }}" target="_blank">
+				<img src="img/works/{{ demo.img }}">
+			</a>
+			<div class="work-descrip">
+				<a href="{{ demo.url }}" target="_blank">
+					<h3>{{ demo.name }}</h3>
+				</a>
+				<p>{{ demo.description }} <a href="{{ demo.src }}" target="_blank" class="src-link">源码 Here</a></p>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
+</div>

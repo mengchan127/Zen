@@ -42,7 +42,7 @@ timezone:      null
 title: 梦禅
 subTitle: 荣枯事过都成梦,悲喜不惊便是禅
 description: 你好,我是梦禅
-url: http://pizn.github.io
+url: /
 feed: /atom.xml
 
 #菜单配置
@@ -54,7 +54,7 @@ nav:
   - text: 作品
     url: /works.html
   - text: 关于
-    url: http://www.zhanxin.info/contact.html
+    url: /about.html
 
 
 #配置你喜欢的顶部背景图片---weiyong
@@ -89,12 +89,3 @@ introduce:
   - content: 你好，我是梦禅
   - content: 90后，热爱前端，梦想成为一名优秀的前端工程师
   - content: 女汉子，水瓶座，爱运动，爱美食，爱生活，爱一切美好的事物
-
-#评论信息--未用
-disqus:
-  config: true
-  id: piznblog
-
-duoshuo:
-  config: false
-  id: zhanxin

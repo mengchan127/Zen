@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			事件（上篇）
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">事件（上篇）</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=javascript" class="tag">javascript</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-07-21</time></span>
+	</div>
+	<div class="markdown art-content">
+		<p>今天看书又看到事件，遂决定小总结一下~</p>
+
+<p>JavaScript与HTML之间的交互是通过事件实现的。事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间。可以使用监听器（事件处理程序）来监听事件，以便事件发生时执行相应的代码。</p>
+
+<p>本文主要讲<strong>事件流</strong>和<strong>事件处理程</strong>序。后续会再写一篇文章，总结<strong>事件类型</strong>。</p>
+
+<hr />
+
+<h1 id="section">事件流</h1>
+<p>大家都举同心圆的栗子，我在这里也说说咯~想象画在一张纸上的一组同心圆，如果把手指放在圆心上，那么手指碰触的不是一个圆，而是纸上所有的圆。这和点击HTML页面上的元素原理是一样的，如果页面上有个按钮，你点击按钮的同时，也点击了按钮的容器元素，点击了容器元素的容器元素……点击了整个页面。</p>
+
+<p><strong>事件流</strong>描述的是<strong>从页面中接收事件的顺序</strong>。现存两种事件流：</p>
+
+<ul>
+  <li>事件冒泡流——IE</li>
+  <li>事件捕获流——Netscape</li>
+</ul>
+
+<h2 id="section-1">事件冒泡</h2>
+<p>接收事件的顺序是：事件由最具体的元素接收，逐级向上传播到较为不具体的节点。</p>
+
+<p>如果页面中有个<code>div</code>，点击了<code>div</code>之后，事件的传播顺序如下：
+(1) div
+(2) body
+(3) html
+(4) document</p>
+
+<p>事件冒泡的过程如下图：
+<img src="/blog/blog_imgs/1.png" alt="事件冒泡的过程" /></p>
+
+<p>所有现代浏览器都支持事件冒泡，而且IE9，Firefox、Chrome、Safari都将事件一直冒泡到<code>window</code>对象。</p>
+
+<h2 id="section-2">事件捕获</h2>
+<p>接收事件的顺序是：事件由最不具体的元素接收，逐级向下传播到最具体的节点。</p>
+
+<p>如果页面中有个<code>div</code>，点击了<code>div</code>之后，事件的传播顺序如下：
+(1) document
+(2) html
+(3) body
+(4) div</p>
+
+<p>事件捕获的过程如下图：
+<img src="/blog/blog_imgs/2.png" alt="事件捕获的过程" /></p>
+
+<p>IE9，Firefox、Chrome、Safari都支持这种事件流模型，而且是从<code>window</code>对象开始捕获事件的。</p>
+
+<h1 id="dom">DOM事件流</h1>
+<p>“DOM2级事件”规定事件流包含3个阶段：<strong>事件捕获阶段</strong>、<strong>处于目标阶段</strong>、<strong>事件冒泡阶段</strong>。
+如下图：
+<img src="/blog/blog_imgs/3.png" alt="DOM2级执行顺序" /></p>
+
+<p>在DOM事件流中，捕获阶段包括1,2,3。冒泡阶段包括4,5,6,7。其中4是处理目标阶段，在事件处理中被看成是冒泡阶段的一部分。</p>
+
+<p>虽然“DOM级事件”规范明确规定捕获阶段不涉及事件目标，但是IE9，Firefox、Chrome、Safari和Opera9.5及以上版本都会在捕获阶段触发事件对象上的事件，这就意味着<strong>有两个机会在目标对象上面操作事件</strong>。</p>
+
+<p>IE9，Firefox、Chrome、Safari、Opera都支持DOM事件流，IE8及更早版本不支持DOM事件流。即IE9，Firefox、Chrome、Safari、Opera及支持冒泡又支持捕获，而IE8及以前版本仅支持冒泡。</p>
+
+<p>需要说明的是，在实际中，大多数都使用冒泡事件，仅在有特殊需要时才使用捕获事件。</p>
+
+<h1 id="section-3">事件处理程序</h1>
+
+<p>在说事件处理程序之前，先简单介绍下<strong>事件对象</strong>。什么是事件对象呢？
+在触发DOM上的某个事件时，会产生一个对象，这个对象中包含所有与事件有关的信息，如导致事件的元素、事件的类型以及其他与特定事件相关的信息，这个对象就是事件对象。所有的事件处理程序都可以访问事件对象，但是访问的方式不尽相同，一种是将事件对象作为事件处理程序的参数，另一种是事件对象作为<code>window</code>的属性，通过<code>window.event</code>来访问。这里就介绍到这里，先有个概念~</p>
+
+<p>回归正题，<code>click</code>，<code>load</code>，<code>mouseover</code>都是事件的名字，而响应某个事件的函数就叫做<strong>事件处理程序</strong>，事件处理程序的名字以“<code>on</code>”开头。</p>
+
+<p>那么该怎样为事件指定处理程序呢？主要有两类方法：<strong>HTML事件处理程序</strong>和<strong>JavaScript指定事件处理程序</strong>。</p>
+
+<h2 id="html">HTML特性指定事件处理程序</h2>
+<p>某个HTML元素支持的每种事件，都可以使用一个与相应事件处理程序同名的HTML特性来指定。这个特性的值是<strong>能够执行的JavaScript代码</strong>。</p>
+
+<h3 id="section-4">具体指定方式</h3>
+
+<pre><code>&lt;input type="button" value="Click" onclick="console.log('hello')" /&gt;  &lt;!--直接是一句代码--&gt;
+</code></pre>
+
+<p>或</p>
+
+<pre><code>&lt;script&gt;
+function show () {
+    console.log('hello');
+}
+&lt;/script&gt;
+
+&lt;input type="button" value="Click" onclick="show()" /&gt;  &lt;!--调用show()函数--&gt;
+</code></pre>
+
+<p>这种方式中，事件处理程序中的代码在执行时，<strong>有权访问全局作用域中的任何代码。</strong></p>
+
+<h3 id="section-5">本质</h3>
+<p>这样的事件处理程序在执行的时候，会<strong>创建</strong>一个封装着元素属性值的<strong>函数</strong>，然后执行这个函数。就是说，</p>
+
+<pre><code> &lt;input type="button" value="Click" onclick="console.log('hello')" /&gt;  
+</code></pre>
+
+<p>当单击按钮的时候，先创建一个函数<code>function () { console.log('hello'); }</code>，然后立即执行该函数。</p>
+
+<p>这个函数有以下3个<strong>特点</strong>：
+1） 函数中会有一个<code>局部变量</code><strong>event</strong>，即事件对象。
+  注意：event是局部变量，可以在函数中直接访问，既不用自己定义，也不是从参数列表中读取。这点与后面其他指定事件处理程序的方式有所不同，记得区分。
+2） 函数内部，<code>this</code>值等于事件的目标元素。
+3）这个动态创建的函数使用<code>with</code>扩展作用域：</p>
+
+<pre><code>function () {
+    with(document) {
+        with(this) {
+          // 元素属性值，如 console.log('hello');
+        }
+    }
+}
+</code></pre>
+
+<p>从而该函数可以访问<code>document</code>及该元素本身的任何成员。这也是为什么“采用这种方式指定的事件处理程序中的代码在执行时，有权访问全局作用域中的任何代码。”，因为作用域中有<code>document</code>。</p>
+
+<h3 id="section-6">取消事件默认行为的方法</h3>
+<p>实质上就是让动态创建的函数<code>return false</code>，所以要这样写：</p>
+
+<pre><code>&lt;a href="http://www.baidu.com" onclick="console.log('hello');  return false;"&gt;baidu&lt;/a&gt;
+</code></pre>
+
+<p>或</p>
+
+<pre><code>&lt;script&gt;
+function show () {
+    console.log('hello');
+}
+&lt;/script&gt;
+
+&lt;a href="http://www.baidu.com" onclick="show();  return false;"&gt;baidu&lt;/a&gt;
+</code></pre>
+
+<p>第二种方式一定要注意，<code>return false</code>是加在<code>onclick</code>属性值里面的，如果放到<code>show()</code>里是不起作用的哦，因为是要“<strong>让动态创建的函数<code>return false</code></strong>”</p>
+
+<h3 id="section-7">3个缺点</h3>
+<ul>
+  <li>时差问题
+用户可能会在HTML元素一出现就在页面上触发相应的事件，但当时的事件处理程序有可能尚不具备执行的条件，从而引发错误。比如上面的<code>show()</code>函数，如果用户单击按钮的时候，<code>function show(){}</code>还没有执行，就会导致错误。</li>
+  <li>这样扩展事件处理程序的作用域链在不同的浏览器中会导致不同的结果。</li>
+  <li>HTML与JavaScript代码紧密耦合，所以实际中这种方法使用的比较少。</li>
+</ul>
+
+<h2 id="javascript">JavaScript指定事件处理程序</h2>
+<p>JavaScript指定事件处理程序主要有两种方式：<strong>DOM0 级事件处理程序</strong>、<strong>DOM2 级事件处理程序</strong>。使用JavaScript指定事件处理程序，首先必须取得对一个操作对象的引用。</p>
+
+<h3 id="dom0-">DOM0 级事件处理程序</h3>
+<p>每个元素（包括<code>window</code>和<code>document</code>）都有自己的事件处理程序属性，这些属性通常全部小写，如<code>onclick</code>，将这种属性赋值为一个函数，就是DOM0 级事件处理程序的指定方式。如下：</p>
+
+<pre><code>var btn = document.getElementById('myBtn'); // 取得对操作对象的引用
+btn.onclick = function () { // 为onclick赋值一个函数，指定事件处理程序
+    console.log('hello');
+}
+</code></pre>
+
+<h4 id="section-8">移除事件处理程序：</h4>
+
+<pre><code>btn.onclick = null; // 只需将属性置空
+</code></pre>
+
+<h4 id="section-9">特点：</h4>
+<p>1）添加事件处理程序的代码只有在运行完之后才会为元素绑定事件处理程序，因此如果该段代码未执行单击按钮是没有反应的。
+2）事件处理程序中的<code>this</code>引用当前元素，即绑定了该事件的元素。
+3）以这种方式添加的事件处理程序会在事件流的<strong>冒泡阶段</strong>被处理。
+4）所有的浏览器都支持DOM0 级事件处理程序。</p>
+
+<h3 id="dom2-">DOM2 级事件处理程序</h3>
+<p>“DOM2 级事件处理程序”定义了两个方法，用来指定和删除事件处理程序：<code>addEventListener()</code> 和 <code>removeEventListener()</code>。这两个方法都接受3个参数：<strong>要处理的事件名</strong>、<strong>作为事件处理程序的函数</strong>、<strong>一个布尔值</strong>，这个布尔值参数如果为<code>true</code>表示在捕获阶段调用事件处理程序，为<code>false</code>表示在冒泡阶段调用事件处理程序，一般设为<code>false</code>。</p>
+
+<h4 id="section-10">添加事件处理程序：</h4>
+
+<pre><code>var btn = document.getElementById('myBtn'); // 取得对操作对象的引用
+btn.addEventListener('click', function(){ // 注意是 click 哦~
+    console.log('hello');
+}, false);
+</code></pre>
+
+<p>或</p>
+
+<pre><code>function show() {
+    console.log('hello');
+}
+
+var btn = document.getElementById('myBtn'); // 取得对操作对象的引用
+btn.addEventListener('click', show, false);
+</code></pre>
+
+<h4 id="section-11">移除事件处理程序：</h4>
+<p>移除事件处理程序有一个要求就是：<strong>移除时传入的参数必须与添加事件处理程序时使用相同的参数。</strong>从而通过<code>addEventListener()</code>添加的匿名函数将无法移除。</p>
+
+<p>移除上面第二种方式绑定的事件处理程序代码：</p>
+
+<pre><code>var btn = document.getElementById('myBtn'); // 取得对操作对象的引用
+btn.removeEventListener('click', show, false);
+</code></pre>
+
+<p>要说明的是：通过<code>addEventListener</code>添加的事件处理程序只能通过<code>removeEventListener()</code>来移除。</p>
+
+<h4 id="section-12">特点</h4>
+<p>1）只有运行完<code>addEventListener()</code>才为元素绑定了事件处理程序。
+2）事件处理程序中的<code>this</code>引用当前元素，即绑定了该事件的元素。
+3）通过设置第三个参数为<code>true</code>或<code>false</code>可以设定在捕获阶段还是冒泡阶段调用事件处理程序。
+4）可以为同一个元素绑定多个事件处理程序，绑定的事件处理程序会按照它们添加的先后顺序依次触发。这是DOM0 级事件处理程序不支持的哦~ DOM0 级只能添加一个事件处理程序，后添加的会覆盖先添加的。
+5）<strong>IE9</strong>、Firefox、Safari、Chrome和Opera都支持DOM2 级事件处理程序。</p>
+
+<h3 id="ie">IE事件处理程序</h3>
+<p>上面特地加粗了IE9，那么IE8及以前版本怎么办呢？IE实现了与DOM中类似的两个方法：<code>attachEvent()</code>和<code>detachEvent()</code>。这两个方法仅接受两个参数：<strong>事件处理程序名称</strong>和<strong>事件处理程序函数</strong>。IE8及之前版本仅支持事件冒泡，所以通过<code>attachEvent()</code>添加的事件处理程序会在冒泡阶段调用。</p>
+
+<p><em>注：IE10及之前版本支持<code>attachEvent()</code>和<code>detachEvent()</code>方法，IE11不再支持，一般IE9及以上都使用DOM方法，这两个方法仅对IE8及以下版本使用。</em></p>
+
+<h4 id="section-13">添加事件处理程序：</h4>
+
+<pre><code>var btn = document.getElementById('myBtn');
+    btn.attachEvent('onclick', function () { // 注意这里是 onclick 哦~
+    console.log('hello');
+});
+</code></pre>
+
+<p>或</p>
+
+<pre><code>function show() {
+    console.log('hello');
+}
+
+var btn = document.getElementById('myBtn');
+btn.attachEvent('onclick', show);
+</code></pre>
+
+<h4 id="section-14">移除事件处理程序：</h4>
+<p>使用<code>detachEvent</code>移除事件处理程序的条件与DOM方法相同——<strong>必须提供相同的参数</strong>，从而添加的匿名函数也无法被移除。</p>
+
+<pre><code>var btn = document.getElementById('myBtn');
+btn.detachEvent('onclick', show);
+</code></pre>
+
+<h5 id="section-15">特点：</h5>
+<p>1）只有运行完<code>attachEvent()</code>才为元素绑定了事件处理程序。
+2）事件处理程序会在<strong>全局作用域</strong>中运行，从而事件处理程序中的<code>this</code>指向全局对象<code>window</code>。这与之前的都不同哦~所以不能认为<code>this</code>始终等于事件目标，当使用<code>attachEvent()</code>的时候，<code>this</code>是<code>window</code>，不过其他时候，<code>this</code>是等于事件目标的~
+3）可以为同一个元素绑定多个事件处理程序，绑定的事件处理程序会按照它们添加顺序的相反次序被触发，即先添加后执行，后添加的先执行。</p>
+
+<p>是不是觉得IE太奇葩呢，如果没有IE，前端世界会和谐很多吧~还好IE9以上都是按照DOM标准来了，不再我行我素。</p>
+
+<h1 id="event">事件对象event</h1>
+<p>这里顺便简单说下事件对象，对比来看，会更清晰~
+前面介绍过事件对象，这里不再赘述。</p>
+
+<h2 id="section-16">事件处理程序中访问事件对象的方式</h2>
+<ul>
+  <li>HTML特性指定事件处理程序
+事件处理程序中会有个<strong>局部变量<code>event</code></strong>，这个<code>event</code>就是事件对象。</li>
+  <li>JavaScript指定事件处理程序
+无论指定事件处理程序采用的是<code>DOM0 级</code>还是<code>DOM2 级</code>方法，事件对象都会<strong>作为事件处理程序的参数</strong>传入到事件处理程序中。</li>
+  <li>奇葩的IE
+在使用<code>DOM0 级</code>方法添加事件处理程序时，事件对象作为<code>window</code>对象的属性存在，通过<code>window.event</code>访问。
+如果使用<code>attachEvent()</code>添加事件处理程序，事件对象会<strong>作为参数</strong>传入到事件处理程序中。</li>
+</ul>
+
+<h2 id="section-17">取消默认行为和阻止事件冒泡</h2>
+<ul>
+  <li>
+    <p>DOM中的事件对象（两个方法）
+<code>preventDefault()</code>方法用来取消事件默认行为，<code>stopPropagation()</code>方法用来阻止事件进一步捕获或冒泡</p>
+
+    <pre><code>// 假设事件对象传入给参数event
+event.preventDefault(); // 取消事件默认行为
+event.stopPropagation(); // 阻止事件进一步捕获或冒泡
+</code></pre>
+  </li>
+  <li>
+    <p>IE8及以下中的事件对象（两个属性）
+<code>returnValue</code>属性用来设置事件的默认行为。默认值为<code>true</code>，当设置为<code>false</code>时，就会取消事件的默认行为。<br />
+<code>cancelBubble</code>属性用来取消事件冒泡。默认值为<code>false</code>，当设置为<code>true</code>时，就会阻止事件冒泡。</p>
+
+    <pre><code>event.returnValue = false; // 取消事件的默认行为
+event.cancelBubble = true; // 阻止事件冒泡
+</code></pre>
+    <p>注：<em>这两个属性仅IE8及以下版本支持，IE9+使用这两个属性会报错。</em></p>
+  </li>
+</ul>
+
+<hr />
+
+<p>终于写完了，这篇写得时间好长……这样整理完知识脉络会清晰一点吧~</p>
+
+<p>本文主要参考《js高级程序设计》事件一章。如有不妥之处，还请指正。谢谢！</p>
+
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

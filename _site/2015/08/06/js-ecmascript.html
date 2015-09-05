@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			ECMAScript各版本简介及特性
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">ECMAScript各版本简介及特性</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=javascript" class="tag">javascript</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-08-06</time></span>
+	</div>
+	<div class="markdown art-content">
+		<p>今天跟一位同学交流，她说面试的时候被问到“ECMAScript有哪些版本，他们之间各有什么区别？”
+想想ECMAScript版本的问题还真没有考虑过，只知道最新的6，之前的5。
+本着了解ECMAScript历史的心态，查了查资料，总结如下~不足之处，还请指正~</p>
+
+<hr />
+
+<h2 id="section">术语</h2>
+
+<h3 id="ecmascript">ECMAScript</h3>
+
+<p>Sun(现在的Oracle)公司持有着“Java”和“JavaScript”的商标。这就让微软不得不把自己的JavaScript方言称之为“JScript”。然后，在这门语言被标准化的时候，就必须使用一个与二者都不同的名字。“ECMAScript”就这样诞生了，这个名字的来由是因为执行标准化的组织是Ecma国际。通常来说，术语“ECMAScript”和“JavaScript”指的是同一个东西。但如果把JavaScript看成是“Mozilla或其他组织的ECMAScript实现”，那么ECMAScript就是实现JavaScript所依据的标准。</p>
+
+<h3 id="ecma-262">ECMA-262</h3>
+
+<p>Ecma国际 (一个标准化组织)创建了ECMA-262规范,这个规范就是ECMAScript语言的官方标准。</p>
+
+<h3 id="ecmascript-6">ECMAScript 6</h3>
+
+<p>指的就是ECMA-262规范的第六版,同时也是当前最新的正式规范。</p>
+
+<h3 id="ecma39-tc39">Ecma第39号技术委员会 (TC39)</h3>
+
+<p>是一组开发ECMA-262标准规范的人(Brendan Eich和其他一些人)。</p>
+
+<h2 id="section-1">历史</h2>
+
+<h3 id="ecmascript-1">ECMAScript 1</h3>
+
+<p>1997年6月发布，本质上与javascript 1.1 相同——只不过只不过删除了所有针对浏览器的代码并作了一些较小的改动：ECMAScript要求支持Unicode标准，而且对象也变成了平台无关的。</p>
+
+<h3 id="ecmascript-2">ECMAScript 2</h3>
+
+<p>1998年6月发布，主要是编辑加工的结果。这一版的内容更新是为了与ISO/IEC-16262保持严格一致，没有作任何新增、修改或删节处理。因此，一般不使用第2版来衡量ECMAScript实现的兼容性。</p>
+
+<h3 id="ecmascript-3">ECMAScript 3</h3>
+
+<p>1999年12月发布，是对ECMAScript标准第一次真正的修改。新增了对<strong>正则表达式、新控制语句、try-catch异常处理</strong>的支持，修改了字符处理、错误定义和数值输出等内容。
+从各方面综合来看，第3版标志着ECMAScript成为了一门真正的编程语言。</p>
+
+<h3 id="ecmascript-4">ECMAScript 4</h3>
+
+<p>于2008年7月发布前被废弃……命运坎坷</p>
+
+<h3 id="ecmascript-5">ECMAScript 5</h3>
+
+<p>2009年12月发布，该版本力求澄清第3版中的歧义，并添加了新的功能。新功能包括：<strong>原生JSON对象、继承的方法、高级属性的定义</strong>以及引入<strong>严格模式</strong>。</p>
+
+<h3 id="ecmascript-6-1">ECMAScript 6</h3>
+
+<p>2015年6月17日发布。截止发布日期，JavaScript的官方名称是ECMAScript 2015，Ecma国际意在更频繁地发布包含小规模增量更新的新版本，下一版本将于2016年发布，命名为ECMAScript 2016。从现在开始，新版本将按照ECMAScript+年份的形式发布。
+S6是继ES5之后的一次主要改进，语言规范由ES5.1时代的245页扩充至600页。ES6增添了许多必要的特性，例如：模块和类以及一些实用特性，例如Maps、Sets、Promises、生成器（Generators）等。
+尽管ES6做了大量的更新，但是它依旧完全向后兼容以前的版本，标准化委员会决定避免由不兼容版本语言导致的“web体验破碎”。结果是，所有老代码都可以正常运行，整个过渡也显得更为平滑，但随之而来的问题是，开发者们抱怨了多年的老问题依然存在。</p>
+
+<h2 id="ecmascript-5-1">ECMAScript 5新特性详解</h2>
+
+<p>移步下面三篇文章~</p>
+
+<ul>
+  <li><a href="http://www.cnblogs.com/dolphinX/p/3348467.html">ECMAScript5 Object的新属性方法</a></li>
+  <li><a href="http://www.cnblogs.com/dolphinX/p/3353868.html">ECMAScript5 Array新增方法</a></li>
+  <li><a href="http://www.cnblogs.com/dolphinX/p/3354319.html">ECMAScript5的其它新特性</a></li>
+</ul>
+
+<h2 id="ecmascript-6-2">ECMAScript 6新特性及代码示例</h2>
+
+<p>移步这里~
+<a href="http://es6-features.org/#Constants">ECMAScript 6 — New Features: Overview &amp; Comparison</a></p>
+
+<p>新增特性的兼容性看这里 <a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a></p>
+
+<hr />
+
+<h2 id="section-2">补充</h2>
+
+<ul>
+  <li><a href="http://segmentfault.com/a/1190000002930417">ECMAScript 6新特性介绍</a></li>
+  <li><a href="http://segmentfault.com/a/1190000003492656">ES6中非常实用的新特性介绍</a></li>
+</ul>
+
+<hr />
+
+<h2 id="section-3">参考文章：</h2>
+<p><a href="http://www.cnblogs.com/ziyunfei/archive/2012/09/24/2699065.html">[译]ECMAScript:ES.next和ES6以及ES Harmony之间的区别</a></p>
+
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

@@ -1,0 +1,65 @@
+---
+layout: main
+title: 关于
+navClass: about-nav
+isDisqus: true
+
+img: img/me.jpg
+intros: 
+  - 你好，我是梦禅。
+  - “梦禅”二字源于“荣枯事过都成梦，悲喜不惊便是禅”，这是《欢乐喜剧人》里高晓攀说的，其实原诗是“荣枯事过都成梦，忧喜心忘便是禅”，但我更喜欢「悲喜不惊」。
+  - 作为一枚女汉子，我喜欢运动，爱跑步，爱踏板。我喜欢旅行，爬山、看海 or 如画风景中静静发呆……
+  - 作为一枚吃货，我喜欢吃美食，也喜欢捣鼓美食，如果你也爱美食，欢迎交流。
+  - 作为一名在读研究生，2016年5月毕业，目前<span>求职中</span>，希望找一份<span>#前端工程师#</span>的工作，<a href="" id="cv-link">戳我看简历咯</a>
+
+contacts: 
+  - name: 邮箱：
+    text: liulying@126.com
+    url: mailto:liulying@126.com
+  - name: 微博：
+    text: 梦禅
+    url: http://weibo.com/uc270506566
+  - name: 知乎：
+    text: 梦禅
+    url: http://www.zhihu.com/people/bisedeciwei
+  - name: QQ：
+    text: 954043526
+    url: 
+  - name: GitHub：
+    text: sally127
+    url: http://github.com/sally127
+  - name: segmentfault：
+    text: 梦禅
+    url: http://segmentfault.com/u/sally127
+
+siteinfo:
+  - 该博客创建于2015年9月，主要用于分享技术、记录生活。
+  - 之前在 segmentfault 上开通专栏<a href="http://segmentfault.com/blog/sallyfenotes" target="_blank">#前端攻城笔记#</a>，每周一篇，督促自己不断学习新知识并总结。以后本站将同步该专栏技术博文。
+  - 我总觉得，将生活中的点滴记录下来，多年后翻看，必会感激自己积攒了这样一笔财富。
+  - 文中不足之处，还请指正。原创的文章，希望转载注明出自 <a href="{{ site.url }}" id="source-link">梦禅</a>。
+---
+<div class="about-wrap">
+	{% if page.img %}
+	<img src="{{ page.img }}">
+	{% endif %}
+	<div class="intro-wrap">
+		<h2>「 关于我 」</h2>
+		{% for item in page.intros %}
+		<p>{{ item }}</p>
+		{% endfor %}
+
+		<h2>「 联系我 」</h2>
+		{% if page.contacts %}
+		<ul>
+			{% for contact in page.contacts %}
+
+			<li>{{ contact.name }}<a href="{{ contact.url }}" target="_blank">{{ contact.text }}</a></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		<h2>「 关于本站 」</h2>
+		{% for item in page.siteinfo %}
+		<p>{{ item }}</p>
+		{% endfor %}
+	</div>
+</div>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			JavaScript 作用域链
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">JavaScript 作用域链</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=javascript" class="tag">javascript</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-05-25</time></span>
+	</div>
+	<div class="markdown art-content">
+		<h2 id="section">1.几个概念</h2>
+<p>先说几个概念：<strong>函数</strong>、<strong>执行环境</strong>、<strong>变量对象</strong>、<strong>作用域链</strong>、<strong>活动对象</strong>。这几个东东之间有什么关系呢，往下看~</p>
+
+<h3 id="section-1">函数</h3>
+<p>函数大家都知道，我想说的是，js中，在函数内部有两个特殊的对象：<code>arguments</code> 和 <code>this</code> 。 <code>arguments</code> 是一个类数组对象，包含着传入函数中的所有参数。 <code>this</code> 引用的是函数据以执行的环境对象。</p>
+
+<h3 id="section-2">执行环境</h3>
+<p>在《js高级程序设计》中，是这样定义的：</p>
+
+<blockquote>
+  <p>执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。</p>
+</blockquote>
+
+<p>这里要特别提到一个执行环境——全局执行环境。全局执行环境是最外围的执行环境，在web浏览器中，全局执行环境被认为是window对象。全局执行环境会一直存在于环境栈的最底端，直到关闭网页或者浏览器。
+执行环境也叫执行上下文。</p>
+
+<h3 id="section-3">变量对象</h3>
+<p>《js高级程序设计》定义如下：</p>
+
+<blockquote>
+  <p>每个执行环境都有一个与之关联的<strong>变量对象</strong>，环境中定义的所有变量和函数都保存在这个对象中。</p>
+</blockquote>
+
+<p>由上可以看出两点：1.执行环境和变量对象是一一对应的。2.执行环境其实是一个“虚”的概念，而变量对象是实际存在的对象，能够被解析器访问到。不严谨的说，为了访问执行环境，就创造了变量对象这个东东，通过变量对象就可以访问执行环境中的所有变量和函数了，它俩其实是一个东西，只不过一个是虚的，一个是真实存在的。</p>
+
+<p>当一个执行环境中的所有代码执行完毕后，该执行环境被销毁，保存在其中的所有变量和函数定义也随之销毁。其实是这个执行环境对应的变量对象被销毁。发现很多地方都把执行环境和变量对象混谈，大家似乎很少提到变量对象，都用 “执行环境” 这四个字替代了，把执行环境说成了一个对象，没办法，谁让说的是一个东西呢。</p>
+
+<h4 id="section-4">变量对象补充</h4>
+
+<p>当JS执行流进入函数时，JavaScript引擎在内部创建一个对象，叫做Variable Object。
+对应函数的每一个参数，在Variable Object上添加一个属性，属性的名字、值与参数的名字、值相同。
+函数中每声明一个变量，也会在Variable Object上添加一个属性，名字就是变量名，因此为变量赋值就是给Variable Object对应的属性赋值。
+在函数中访问参数或者局部变量时，就是在variable Object上搜索相应的属性，返回其值。
+一般情况下Variable Object是一个内部对象，JS代码中无法直接访问。</p>
+
+<h3 id="section-5">作用域链</h3>
+
+<blockquote>
+  <p>作用域链的用途：保证对执行环境有权访问的所有变量和函数的 <em>有序</em> 访问。
+当代码在一个执行环境中执行时，就会创建变量对象的一个作用域链。</p>
+</blockquote>
+
+<p>我的理解是，作用域链是由一个一个变量对象链接起来的一个链，整个作用域链构成了当前执行环境中变量和函数可访问的范围，即作用域。由于变量对象是按一定顺序链接在一起的，所以就达到了对所有可访问变量、函数有序访问的效果。那么它们是按怎样的顺序链接成作用域链的呢？这就要说到最后一个概念——活动对象。</p>
+
+<h3 id="section-6">活动对象</h3>
+
+<blockquote>
+  <p>当函数运行时就会为其创建一个活动对象，其中包含形参和函数特殊的arguments对象。活动对象之后会做为函数执行环境的变量对象来使用。</p>
+</blockquote>
+
+<p>回到之前的问题，作用域链中的变量对象是如何排序的呢？
+作用域链的前端，始终都是当前执行的代码所在环境的变量对象。但如果这个环境是函数，则将其活动对象作为变量对象，放在其作用域链的前端。作用域链中的下一个变量对象来自包含环境，而再下一个变量对象来自下一个包含环境……这样一直延续到全局执行环境。全局执行环境的变量对象始终是作用域链中的最后一个变量对象。</p>
+
+<p>为什么执行环境是函数会有这样特殊的规定呢？
+《JS权威指南》中有一句很精辟的描述：</p>
+
+<blockquote>
+  <p>JavaScript中的函数运行在它们被定义的作用域里，而不是它们被执行的作用域里。</p>
+</blockquote>
+
+<p>按照之前所说，在函数定义的作用域里，当前执行环境的作用域链上是没有该函数的活动对象的，为了访问函数内部的变量、函数，所以要将其活动对象插在当前作用域链的前端。</p>
+
+<h2 id="section-7">2.它们之间的关系</h2>
+
+<ul>
+  <li>每个函数都有自己的执行环境，当执行流进入一个函数时，函数的环境就会被推入一个环境栈中。而在执行后，栈将其环境弹出，把控制权返回给之前的执行环境。</li>
+  <li>综上，每个函数对应一个执行环境，每个执行环境对应一个变量对象，而多个变量对象构成了作用域链，如果当前执行环境是函数，那么其活动对象在作用域链的前端。</li>
+</ul>
+
+<hr />
+
+<h2 id="section-8">3.其他补充</h2>
+<p>JS的语法风格和 C/C++ 类似, 但作用域的实现却和 C/C++ 不同，并非用“堆栈”方式，而是使用列表，具体过程如下(ECMA262中所述):</p>
+
+<p>任何执行上下文时刻的作用域, 都是由作用域链(scope chain)来实现.
+在执行func的定义语句的时候, 会创建一个这个函数对象的[[scope]]属性(内部属性,只有JS引擎可以访问)，并将这个[[scope]]属性链接到定义它的作用域链上。
+在调用func的时候, 会创建一个活动对象，然后将调用参数赋值给形参数，对于缺少的调用参数，赋值为undefined。然后将这个活动对象做为scope chain的最前端, 并将func的[[scope]]属性所指向的，定义func时候的顶级活动对象，加入到scope chain.</p>
+
+<hr />
+
+<h2 id="section-9">参考资料</h2>
+<ul>
+  <li>
+    <p>《js高级程序设计》 P73  4.2 执行环境及作用域</p>
+  </li>
+  <li>
+    <p><a href="http://www.laruence.com/2009/05/28/863.html">鸟哥：JavaScript作用域原理</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cnblogs.com/lhb25/archive/2011/09/06/javascript-scope-chain.html">JavaScript 开发进阶：理解 JavaScript 作用域和作用域链</a></p>
+
+  </li>
+</ul>
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

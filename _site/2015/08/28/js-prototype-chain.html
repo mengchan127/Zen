@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			小角度看JS原型链
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">小角度看JS原型链</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=javascript" class="tag">javascript</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-08-28</time></span>
+	</div>
+	<div class="markdown art-content">
+		<h2 id="section">前言</h2>
+
+<p>在 segmentfault 上看到这样一道<a href="http://segmentfault.com/q/1010000003503459">题目</a>：</p>
+
+<pre><code>var F = function(){};
+Object.prototype.a = function(){};
+Function.prototype.b = function(){};
+var f = new F();
+</code></pre>
+<p>问：f 能取到a,b吗？原理是什么？</p>
+
+<p>乍一看真的有点懵，仔细研究了一下，发现还是对原型理解不透彻，所以总结一篇，填个洞~</p>
+
+<hr />
+
+<h2 id="functionobject">Function和Object</h2>
+<p>在解题之前，先再说说 原型、原型链，以及 Function 和 Object 的关系，这也是本文的重点。</p>
+
+<h3 id="section-1">原型</h3>
+
+<ul>
+  <li>在创建一个函数的时候，会自动为其创建一个原型对象，可以通过函数的<code>prototype</code>属性访问到。</li>
+  <li>创建一个构造函数的实例对象，该实例对象内部将包含一个指针（内部属性），指向构造函数的原型对象。ECMA-262 第5版中管这个指针叫<code>[[prototype]]</code>。虽然在脚本中没有标准的方式访问<code>[[prototype]]</code>，但Firefox、 Safari、 Chrome在每个对象上都支持一个属性 <code>__proto__</code>，用于访问其构造函数的原型对象。</li>
+  <li>重要的事情再说一遍：
+<strong>构造函数通过 prototype 属性访问原型对象。</strong>
+<strong>实例对象通过 [[prototype]] 内部属性访问原型对象，浏览器实现了 __proto__ 属性用于实例对象访问原型对象。</strong></li>
+</ul>
+
+<pre><code>var F = function () {};
+var f = new F();
+// 假设F的原型对象是 p, 则
+// F.prototype === p;
+// f.__proto__ === p;
+</code></pre>
+
+<p>再重复一遍。。<code>prototype</code>说的是构造函数和原型对象之间的关系，<code>__proto__</code>说的是实例对象和原型对象之间的关系。</p>
+
+<h3 id="section-2">原型链</h3>
+<p>类 A继承B，B继承C……其实就是A的原型对象中有指针指向B的原型对象，而B的原型对象中有指针指向C的原型对象……注意是原型对象之间的联系，A B C 这三个构造函数之间并没什么关系，所以才称为“原型链”吧~</p>
+
+<p>假设a是A的实例对象，则 a 的原型链为下图中紫色线条所示，橙色线条连接了构造函数和其原型对象。</p>
+
+<p><img src="/blog/blog_imgs/7.png" alt="图片描述" /></p>
+
+<p>由图可以看出，原型链的末端是<code>Object.prototype.__proto__</code>即<code>null</code>。当查找<code>a</code>的某个属性或方法时，首先查找<code>a</code>自身有没有，没有则沿着原型链一直查找，直到找到或者最后到<code>null</code>返回<code>undefined</code>。</p>
+
+<h3 id="function--object">Function 和 Object</h3>
+<p><code>Function</code> 和 <code>Object</code> 之间的关系有点绕：
+<code>Object</code> 是构造函数，既然是函数，那么就是<code>Function</code>的实例对象；<code>Function</code>是构造函数，但<code>Function.prototype</code>是对象，既然是对象，那么就是<code>Object</code>的实例对象。</p>
+
+<p><strong>一切对象都是<code>Object</code>的实例，一切函数都是<code>Function</code>的实例。</strong>
+<code>Object</code>是<code>Function</code>的实例，而<code>Function.prototype</code>是<code>Object</code>的实例。</p>
+
+<p>二者的关系如下图所示。</p>
+
+<p><img src="/blog/blog_imgs/8.png" alt="图片描述" /></p>
+
+<p>可见，<code>Object</code>作为构造函数，它有 <code>prototype</code> 属性指向 <code>Object.prototype</code> , 作为实例对象， 它有 <code>Object.__proto__</code> 指向<code>Function.prototype</code>。<code>Function</code>是构造函数，它有<code>prototype</code>属性指向<code>Function.prototype</code>，而<code>Function</code>是函数，从而也是<code>Function</code>的实例，所以它有<code>Function.__proto__</code>指向<code>Function.prototype</code>，从而 <code>Function.__proto__ === Function.prototype</code> 为 <code>true</code>。</p>
+
+<p>可在Chrome控制台下进行验证，如图。</p>
+
+<p><img src="/blog/blog_imgs/10.png" alt="图片描述" /></p>
+
+<h2 id="section-3">原题解析</h2>
+<p>解决原型链问题最好的办法就是画图了，经过前面的分析，这个图画起来应该不成问题，如下~</p>
+
+<p><img src="/blog/blog_imgs/9.png" alt="图片描述" /></p>
+
+<p>f 的原型链为蓝色线所画，所以 f 可以访问到 a , 不能访问到 b 。</p>
+
+<p>如果不画图，乍一看，可能会觉得f 可以访问到 b，那是可能跟我一样误认为<code>F.prototype</code>指向<code>Function.prototype</code>，但其实<code>F.prototype</code>是对象而不是函数，所以它的原型对象<strong>不会</strong>是 <code>Function.prototype</code>。</p>
+
+<p>所以，原型链问题一应要画图啊~</p>
+
+<h2 id="section-4">原题扩展</h2>
+<p>在上题中，f 只能访问 a，不能访问 b 。但 F 既可以访问 a ，又可以访问 b。
+如果把题修改成下面的样子， <code>F.b()</code>的结果是什么呢？为什么呢？可以想一下哦~</p>
+
+<pre><code>var F = function(){};
+Object.prototype.a = function(){};
+Function.prototype.b = function(){ console.log('F.__proto__') };
+F.prototype.b = function (){console.log('F.prototype');};
+</code></pre>
+
+<h2 id="section-5">总结</h2>
+<ul>
+  <li>
+    <p>读到这里，有没有发现函数一个比较特殊的地方？
+一般的对象，只有一个<code>__proto__</code>属性用于访问其构造函数的原型对象，而对于函数来说，它既是函数又是对象。
+作为函数，它生来就有<code>prototype</code>属性指向其原型对象<code>函数名.prototype</code>。
+作为Function的实例对象，它有<code>__proto__</code>属性指向<code>Function.prototype</code>
+通常，这两个属性是指向两个对象的，但<code>Function</code>的这两个属性指向相同，都指向<code>Function.prototype</code>。</p>
+  </li>
+  <li>
+    <p>对于函数 <code>A( )</code> 来说，<code>A.prototype</code> 中的方法是供其实例对象调用的，自己并不会用；当A 作为实例运行时，调用的是 <code>A.__proto__</code> 中的方法。也就是说，作为构造函数使用时，走的是<code>A.prototype</code>这条链，方法、属性赋给其实例；作为对象使用时，走的是<code>A.__proto__</code>这条链。在不同的场景下，分清它的身份就不会错了。</p>
+  </li>
+</ul>
+
+<hr />
+
+<p>整篇下来，感觉自己说的也比较絮叨……不足之处，还请各位指正~ 至于题目，真的不知道该叫什么好。。</p>
+
+<p>愿本文能带给坚持看完的你一些收获~  ^_^</p>
+
+<h2 id="section-6">参考</h2>
+<p><a href="http://segmentfault.com/q/1010000002736664">js 原型的问题 Object 和 Function 到底是什么关系？—— 高票答案</a></p>
+
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

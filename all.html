@@ -1,0 +1,48 @@
+---
+layout: default
+logoBgClass: blog-logo-bg
+logoClass: blog-logo
+title: All Posts
+---
+
+<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+		{% include yugen.html %}
+		<h1 id="tag-name"></h1>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div id="tag-posts"></div>
+		</div>
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+<script src="/js/jquery.query.js"></script>
+<script>
+	$(document).ready(function () {
+		var dataStr = '{ {% for tag in site.tags %}{% if tag[0] != site.tags.first[0] %},{% endif %}"{{ tag[0] }}":[{% for post in tag[1] %}{% if post != tag[1].first %},{% endif %}{"url":"{{post.url}}", "title":"{{post.title}}", "date":"{{post.date | date:"%Y年%m月%d日"}}","descrip":"{{post.description}}"}{% endfor %}]{% endfor %} }';
+	    var data = $.parseJSON(dataStr);
+	    var curTag = $.query.get("tag");
+	    var archieves = data[curTag]; 
+
+	    var text = '';
+	    for (var i = 0; i < archieves.length; i++) {
+	    	text +=  '<article>'
+	    		   + '<h2 class="article-title">'
+	    		   + '<a href="' + archieves[i].url + '" title="' + archieves[i].title + '">' + archieves[i].title + '</a>'
+	    		   + '</h2>'
+	    		   + '<p class="article-descrip">' + archieves[i].descrip + '</p>'
+	    		   + '<div class="pannel-box">'
+	    		   + '<span class="pub-date">发表于 ' + archieves[i].date + '</span>'
+	    		   + '<a href="' + archieves[i].url + '" class="read-more" title="查看全文">More</a>'
+	    		   + '<span class="view-count">(30人已阅)</span>'
+	    		   + '</div>'
+	    		   + '</article>';
+	    }
+	    $('#tag-name').html('Tag: <span>' + curTag + '</span>');
+	    $('#tag-posts').html(text);
+	});
+	
+</script>

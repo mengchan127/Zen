@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			All Posts
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<h1 id="tag-name"></h1>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div id="tag-posts"></div>
+		</div>
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+<script src="/js/jquery.query.js"></script>
+<script>
+	$(document).ready(function () {
+		var dataStr = '{ "javascript":[{"url":"/2015/08/28/js-prototype-chain.html", "title":"小角度看JS原型链", "date":"2015年08月28日","descrip":"在解题之前，先再说说 原型、原型链，以及 Function 和 Object 的关系，这也是本文的重点。"},{"url":"/2015/08/24/js-promise.html", "title":"【转载】JavaScript Promise启示录", "date":"2015年08月24日","descrip":"前段时间频频看到<b>Promise</b>这个词，今天发现腾讯AlloyTeam写得这篇很赞，遂转之。"},{"url":"/2015/08/06/js-ecmascript.html", "title":"ECMAScript各版本简介及特性", "date":"2015年08月06日","descrip":"今天跟一位同学交流，她说面试的时候被问到“ECMAScript有哪些版本，他们之间各有什么区别？” 想想ECMAScript版本的问题还真没有考虑过，只知道最新的6，之前的5。本着了解ECMAScript历史的心态，查了查资料，总结如下~不足之处，还请指正~"},{"url":"/2015/07/21/js-event.html", "title":"事件（上篇）", "date":"2015年07月21日","descrip":"JavaScript与HTML之间的交互是通过事件实现的。事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间。可以使用监听器（事件处理程序）来监听事件，以便事件发生时执行相应的代码。"},{"url":"/2015/07/10/js-function.html", "title":"为function添加值为function的属性", "date":"2015年07月10日","descrip":"今天在某个js交流群里看到这样一个问题——亲们，如果我定义一个 function A() { } 可以给这个函数添加一个方法吗？"},{"url":"/2015/07/07/js-this.html", "title":"JavaScript中的 this", "date":"2015年07月07日","descrip":"每个函数在被调用时都会自动取得两个特殊的对象：`this` 和 `arguments`，`arguments` 是一个类数组对象，包含着传入函数中的所有参数， `this` 引用的是函数据以执行的环境对象。"},{"url":"/2015/06/26/js-isArray.html", "title":"JavaScript 检测数组", "date":"2015年06月26日","descrip":"JS的经典问题之一就是“检测一个对象是不是数组”，本文总结了3种检测方法。"},{"url":"/2015/06/16/js-closure.html", "title":"JavaScript 闭包", "date":"2015年06月16日","descrip":"作为一个初学者，学习一个新的概念无非就是知道 <b>“它是什么”、“什么原理”、“怎样创建”、“有什么用”、“怎么用”</b>，这篇文章就从这几个角度介绍闭包，欢迎小伙伴们拍砖~"},{"url":"/2015/06/01/js-prototype.html", "title":"JavaScript 原型", "date":"2015年06月01日","descrip":"原型是一个对象。<strong>所有对象都有原型。</strong>任何一个对象也都可以成为其他对象的原型。每个原型都有一个 constructor 属性指向其构造函数。"},{"url":"/2015/05/25/js-scope-chain.html", "title":"JavaScript 作用域链", "date":"2015年05月25日","descrip":"先说几个概念：<strong>函数</strong>、<strong>执行环境</strong>、<strong>变量对象</strong>、<strong>作用域链</strong>、<strong>活动对象</strong>。这几个东东之间有什么关系呢，往下看~"}],"前端":[{"url":"/2015/08/28/js-prototype-chain.html", "title":"小角度看JS原型链", "date":"2015年08月28日","descrip":"在解题之前，先再说说 原型、原型链，以及 Function 和 Object 的关系，这也是本文的重点。"},{"url":"/2015/08/24/js-promise.html", "title":"【转载】JavaScript Promise启示录", "date":"2015年08月24日","descrip":"前段时间频频看到<b>Promise</b>这个词，今天发现腾讯AlloyTeam写得这篇很赞，遂转之。"},{"url":"/2015/08/06/js-ecmascript.html", "title":"ECMAScript各版本简介及特性", "date":"2015年08月06日","descrip":"今天跟一位同学交流，她说面试的时候被问到“ECMAScript有哪些版本，他们之间各有什么区别？” 想想ECMAScript版本的问题还真没有考虑过，只知道最新的6，之前的5。本着了解ECMAScript历史的心态，查了查资料，总结如下~不足之处，还请指正~"},{"url":"/2015/07/31/css-line-height.html", "title":"css中的line-height", "date":"2015年07月31日","descrip":"简单说说CSS中我们常用但又不一定真正了解的<b>line-height</b>属性"},{"url":"/2015/07/21/js-event.html", "title":"事件（上篇）", "date":"2015年07月21日","descrip":"JavaScript与HTML之间的交互是通过事件实现的。事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间。可以使用监听器（事件处理程序）来监听事件，以便事件发生时执行相应的代码。"},{"url":"/2015/07/10/js-function.html", "title":"为function添加值为function的属性", "date":"2015年07月10日","descrip":"今天在某个js交流群里看到这样一个问题——亲们，如果我定义一个 function A() { } 可以给这个函数添加一个方法吗？"},{"url":"/2015/07/07/js-this.html", "title":"JavaScript中的 this", "date":"2015年07月07日","descrip":"每个函数在被调用时都会自动取得两个特殊的对象：`this` 和 `arguments`，`arguments` 是一个类数组对象，包含着传入函数中的所有参数， `this` 引用的是函数据以执行的环境对象。"},{"url":"/2015/06/26/js-isArray.html", "title":"JavaScript 检测数组", "date":"2015年06月26日","descrip":"JS的经典问题之一就是“检测一个对象是不是数组”，本文总结了3种检测方法。"},{"url":"/2015/06/16/js-closure.html", "title":"JavaScript 闭包", "date":"2015年06月16日","descrip":"作为一个初学者，学习一个新的概念无非就是知道 <b>“它是什么”、“什么原理”、“怎样创建”、“有什么用”、“怎么用”</b>，这篇文章就从这几个角度介绍闭包，欢迎小伙伴们拍砖~"},{"url":"/2015/06/01/js-prototype.html", "title":"JavaScript 原型", "date":"2015年06月01日","descrip":"原型是一个对象。<strong>所有对象都有原型。</strong>任何一个对象也都可以成为其他对象的原型。每个原型都有一个 constructor 属性指向其构造函数。"},{"url":"/2015/05/25/js-scope-chain.html", "title":"JavaScript 作用域链", "date":"2015年05月25日","descrip":"先说几个概念：<strong>函数</strong>、<strong>执行环境</strong>、<strong>变量对象</strong>、<strong>作用域链</strong>、<strong>活动对象</strong>。这几个东东之间有什么关系呢，往下看~"}],"webrtc":[{"url":"/2015/06/07/webrtc-to-sip.html", "title":"WebRTC简介及其与SIP互通", "date":"2015年06月07日","descrip":"WebRTC，名称源自网页实时通信（Web Real-Time Communication）的缩写，是一个支持网页浏览器进行实时语音对话或视频对话的技术，是谷歌2010年以6820万美元收购Global IP Solutions公司而获得的一项技术。"}],"css":[{"url":"/2015/07/31/css-line-height.html", "title":"css中的line-height", "date":"2015年07月31日","descrip":"简单说说CSS中我们常用但又不一定真正了解的<b>line-height</b>属性"}] }';
+	    var data = $.parseJSON(dataStr);
+	    var curTag = $.query.get("tag");
+	    var archieves = data[curTag]; 
+
+	    var text = '';
+	    for (var i = 0; i < archieves.length; i++) {
+	    	text +=  '<article>'
+	    		   + '<h2 class="article-title">'
+	    		   + '<a href="' + archieves[i].url + '" title="' + archieves[i].title + '">' + archieves[i].title + '</a>'
+	    		   + '</h2>'
+	    		   + '<p class="article-descrip">' + archieves[i].descrip + '</p>'
+	    		   + '<div class="pannel-box">'
+	    		   + '<span class="pub-date">发表于 ' + archieves[i].date + '</span>'
+	    		   + '<a href="' + archieves[i].url + '" class="read-more" title="查看全文">More</a>'
+	    		   + '<span class="view-count">(30人已阅)</span>'
+	    		   + '</div>'
+	    		   + '</article>';
+	    }
+	    $('#tag-name').html('Tag: <span>' + curTag + '</span>');
+	    $('#tag-posts').html(text);
+	});
+	
+</script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+</body>
+</html>

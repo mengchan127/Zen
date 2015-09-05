@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			JavaScript 原型
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">JavaScript 原型</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=javascript" class="tag">javascript</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-06-01</time></span>
+	</div>
+	<div class="markdown art-content">
+		<p>今天研究了一下js的原型，把自己的理解写到这里，如有不正确的地方，还望指出，在此先谢过啦~</p>
+
+<h3 id="section">什么是原型？</h3>
+
+<p>原型是一个对象。<strong>所有对象都有原型。</strong>任何一个对象也都可以成为其他对象的原型。
+每个原型都有一个 <code>constructor</code> 属性指向其构造函数。</p>
+
+<h3 id="section-1">怎么访问原型？</h3>
+
+<p>一个对象的原型被对象内部的 <code>[[Prototype]]</code> 属性所持有。
+一句话就是，所有对象都有原型，其原型是该对象的内部属性。那么有哪些方法可以访问到这个内部属性呢？</p>
+
+<ul>
+  <li>ECMAScript 5 增加了方法 <code>Object.getPrototypeOf()</code> ，用于返回对象 <code>[[Prototype]]</code> 的值。IE 9+、Firefox 3.5+、Safari 5+、Opera 12+ 和 Chrome 都实现了该方法。</li>
+  <li>除了IE，其他浏览器都支持非标准的访问器 <code>__proto__</code></li>
+  <li>如果这两者都不起作用，我们就需要通过对象的构造函数找它的原型属性了。</li>
+</ul>
+
+<pre><code>    var a = {};
+    Object.getPrototypeOf(a);
+    a.__proto__;
+    a.constructor.prototype;
+</code></pre>
+
+<h3 id="prototype-">函数的 prototype 属性</h3>
+<p>不知亲刚刚有没有注意到访问 <code>[[Prototype]]</code> 的最后一个方法 <code>a.constructor.prototype;</code> ，直接使用了构造函数的 <code>prototype</code>属性。</p>
+
+<p>在这里要多说两句，js中函数也是对象，所以函数也有原型，其原型也和其他对象一样，可以通过 <code>Object.getPrototypeOf()</code> 和 <code>__proto__</code> 访问。但是创建对象时，我们往往要使用构造函数 （<code>constructor</code>） 的原型，为了用起来方便，就给构造函数添加了 <code>prototype</code> 属性，用于直接访问其原型。由于所有的函数都可以成为构造函数，所以就造就了函数有那么一点点特（you）殊（shi）—— 一个函数可以通过其 <code>prototype</code> 属性直接访问其原型，或者说 <strong>一个函数的 <code>prototype</code> 属性指向其原型对象</strong>。</p>
+
+<p>如果仅仅只是因为一个实例而使用原型是没有多大意义的，这和直接添加属性到这个实例是一样的。原型真正魅力体现在多个实例共用一个原型，原型对象的属性一旦定义，就可以被多个引用它的实例所继承，这种操作在性能和维护方面其意义是不言自明的。</p>
+
+<p>这也是构造函数存在的原因，构造函数提供了一种方便的跨浏览器机制，这种机制允许在创建实例时为实例提供一个通用的原型。</p>
+
+<h3 id="section-2">原型语法</h3>
+<p>在使用原型前，先写一下构造函数部分。</p>
+
+<pre><code>function Calculator (decimalDigits, tax) {
+    this.decimalDigits = decimalDigits;
+    this.tax = tax;
+};
+</code></pre>
+
+<h4 id="section-3">分步声明</h4>
+<p>分开设置原型的每个属性。</p>
+
+<pre><code>Calculator.prototype.add = function (x, y) {
+    return x + y;
+};
+
+Calculator.prototype.subtract = function (x, y) {
+    return x - y;
+};
+</code></pre>
+<p>这样，在new Calculator对象以后，就可以调用add方法来计算结果了。
+此时， <code>Calculator.prototype</code> 的 <code>constructor</code> 属性指向 Calculator。即：
+<code>Calculator.prototype.constructor = Calculator</code></p>
+
+<h4 id="section-4">更简单的原型语法</h4>
+<p>通过给Calculator的prototype属性赋值<strong>对象字面量</strong>来设定Calculator对象的原型。</p>
+
+<pre><code>Calculator.prototype = {
+    add: function (x, y) {
+        return x + y;
+    },
+    subtract: function (x, y) {
+        return x - y;
+    }
+};
+</code></pre>
+
+<p>上面的代码中，将 Calculator.prototype 赋值为一个以对象字面量形式创建的新对象。最终结果相同，但是，<strong>此时 constructor 属性不再指向 Calculator</strong> ，即 <code>Calculator.prototype.constructor != Calculator</code> 。</p>
+
+<p>每创建一个函数，就会同时创建它的 prototype 对象，这个对象会自动获得 constructor 属性。而我们这里使用的语法，本质上完全重写了默认的 prototype 对象，因此 constructor 属性也就变成了新对象的 constructor 属性 —— 指向 <strong>Object</strong> 构造函数。</p>
+
+<p>如果 constructor 的值很重要，可以向下面一样设定：</p>
+
+<pre><code>Calculator.prototype = {
+
+    // 修复constructor 属性
+    constructor: Calculator, 
+    
+    add: function (x, y) {
+        return x + y;
+    },
+
+    subtract: function (x, y) {
+        return x - y;
+    }
+};
+</code></pre>
+
+<h4 id="section-5">其他方式</h4>
+<p>使用function立即执行的表达式来为prototype赋值，格式如下：</p>
+
+<pre><code>Calculator.prototype = function () {
+    var add = function (x, y) {
+        return x + y;
+    },
+
+    var subtract = function (x, y) {
+        return x - y;
+    }
+    
+    return {
+        add: add,
+        subtract: subtract
+    }
+} ();
+</code></pre>
+
+<h3 id="section-6">原型的动态性</h3>
+
+<pre><code>var friend = new Person();
+
+Person.prototype.sayHi = function () {
+    alert("hi");
+};
+
+friend.sayHi(); // "hi" （没有问题）
+</code></pre>
+
+<p>在以上代码中，即使 friend 是在添加新方法之前创建的，但它仍然可以访问这个新方法。其原因可以归结为实例与原型之间的松散连接关系。当我们调用 <code>friend.sayHi()</code> 时，会首先在实例中搜索名为 sayHi 的属性，在没有找到的情况下，会继续搜索原型。因为实例实例与原型之间连接是一个指针，而非副本，因此可以在原型中找到新的 sayHi 属性并返回保存在那里的函数。</p>
+
+<p>可以随时为原型添加属性和方法，并且修改能立即在所有对象实例中反映出来，但如果重写了原型对象，那结果就不一样了……</p>
+
+<pre><code>function Person () {
+}
+
+var friend = new Person();
+
+Person.prototype = {
+    constructor: Person,
+    name: "Nicholas",
+    age: 29,
+    job: "software Engineer",
+    sayHi: function () {
+        alert("hi");
+    }
+};
+
+friend.sayHi(); // error
+</code></pre>
+
+<p>在这个例子中，先创建了 friend 实例，然后又重写其原型对象。在调用 <code>friend.sayHi()</code> 时发生错误，因为friend 指向的原型中不包含以该名字命名的属性。</p>
+
+<p>重写原型对象切断了现有原型与任何之前已经存在的对象实例之间的联系，这些实例仍然引用的是最初的原型。</p>
+
+<h3 id="section-7">一切都是对象</h3>
+
+<p>这部分与原型没什么大关系，只是看到了觉有帮助，就插到这里了，莫要见怪 ：）</p>
+
+<p>当然，也不是所有的都是对象，值类型就不是对象。</p>
+
+<p>举个不太容易理解的例子，函数作为对象时，其属性还是函数的例子。</p>
+
+<pre><code>var fn = function () {
+    alert(100);
+};
+
+fn.a = 10;
+fn.b = function () {
+    alert(123);
+};
+fn.c = {
+    name: "福布斯",
+    year: 1968
+};
+</code></pre>
+<p>上段代码中，函数就作为对象被赋值了a、b、c三个属性，第二个属性值就是函数，这个有用吗？
+可以看看jQuery源码。</p>
+
+<p>在jQuery源码中，“jQuery”或者“$”，这个变量其实是一个函数，不信可以用 typeof 验证一下。</p>
+
+<pre><code>console.log(typeof $);  // function
+console.log($.trim(" ABC "));
+</code></pre>
+<p>验明正身！的确是个函数。而经常使用的 $.trim() 也是个函数。</p>
+
+<p>很明显，这就是在 $ 或者 jQuery 函数上加了一个 trim 属性，属性值是函数，作用是截取前后空格。要习惯的把js中的一切看作对象，只要是对象，就是属性的集合，属性是键值对的形式。</p>
+
+<h3 id="section-8">参考资料</h3>
+
+<ul>
+  <li><a href="http://blog.jobbole.com/9648/">理解JavaScript原型</a></li>
+  <li><a href="http://www.cnblogs.com/wangfupeng1988/p/3977987.html">深入理解javascript原型和闭包（1）——一切都是对象</a></li>
+  <li><a href="http://www.nowamagic.net/librarys/veda/detail/1648">JavaScript探秘：强大的原型和原型链</a></li>
+</ul>
+
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

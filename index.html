@@ -1,15 +1,13 @@
 ---
 layout: default
+navClass: index-nav
+logoBgClass: logo-bg
+logoClass: logo
 ---
 
 <div class="container">
     {% include yugen.html %}
-
-    <ul class="index-nav">
-    {% for nav in site.nav %}
-        <li><a href="{{ nav.url }}">{{ nav.text }}</a></li>
-    {% endfor %}
-    </ul>
+    {% include nav.html %}
 
 	<!-- main -->
 	<div class="main">

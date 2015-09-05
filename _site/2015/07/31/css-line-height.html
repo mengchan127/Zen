@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			css中的line-height
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">css中的line-height</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=css" class="tag">css</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-07-31</time></span>
+	</div>
+	<div class="markdown art-content">
+		<p>又已经快十天没有写文章了，一周一篇其实好艰难的说……本来想接着上篇 <a href="http://segmentfault.com/a/1190000003007361">事件（上篇）</a> 总结事件类型的，可是看完之后整理下还是有点乱，就一直拖着没写……实在是不能再拖下去了，今天就简单说说CSS中我们常用但又不一定真正了解的<code>line-height</code>属性。</p>
+
+<h2 id="section">基本概念</h2>
+
+<h3 id="section-1">行高、行距</h3>
+
+<p><strong>行高是指文本行基线间的垂直距离</strong>。那什么是基线呢？记不记得<code>vertical-align</code>属性有个<code>baseline</code>值，这个<code>baseline</code>就是基线。看张“盗图”（选自下面的参考文章），其实我也修改了一下啦~</p>
+
+<p><img src="/blog/blog_imgs/4.png" alt="图片描述" />
+<strong>注意</strong>：倒数第二根是基线哦，最下面那根是底线，不是基线。</p>
+
+<p>图中两条红线之间的距离就是<strong>行高</strong>（line-height），上一行的底线和下一行的顶线之间的距离就是<strong>行距</strong>，而同一行顶线和底线之间的距离是<strong>font-size</strong>的大小，行距的一半是<strong>半行距</strong>，半行距、font-size、line-height之间的关系看图片的右下角就一目了然了~</p>
+
+<pre><code>半行距 = （line-height - font-size）/2
+</code></pre>
+
+<p>当然，半行距也可能为负值（当line-height &lt; font-size），这时候两行之间就会重叠，如下图所示：
+<img src="/blog/blog_imgs/5.png" alt="图片描述" /></p>
+
+<h3 id="box">4种box</h3>
+<p>要说的4种盒子分别是<code>inline box</code>、<code>line box</code>、<code>content area</code>、<code>containing box</code> ~</p>
+
+<ul>
+  <li>
+    <p>inline box (行内框)
+每个行内元素会生成一个行内框，行内框是一个浏览器渲染模型中的一个概念，无法显示出来，行内框的高度等于<code>font-size</code>，<strong>设定<code>line-height</code>时，行内框的高度不变，改变的是行距</strong>。</p>
+  </li>
+  <li>
+    <p>line box （行框）
+行框是指本行的一个虚拟的矩形框，由该行中行内框组成。行框也是浏览器渲染模式中的一个概念，无法显示出来。<strong>行框高度等于本行中所有行内框高度的最大值。</strong>当有多行内容时，每一行都有自己的行框。</p>
+  </li>
+  <li>
+    <p>content area （内容区）
+内容区是围绕着文字的一种box，无法显示出来，其高度取决于<code>font-size</code>和<code>padding</code>。<strong><em>个人觉得</em></strong>：内容区的高度 = font-size + padding-top + padding-bottom，有待查证，也期待小伙伴们给出答案~</p>
+  </li>
+  <li>
+    <p>containing box 
+containing box 是包裹着上述三种box的box，有点绕哈~看图</p>
+  </li>
+</ul>
+
+<p><img src="/blog/blog_imgs/6.png" alt="图片描述" /></p>
+
+<p>原谅我画图水平有限，不过仔细辨认还是能看出来的~  ^_^</p>
+
+<h2 id="section-2">取值</h2>
+<p>一般情况下，浏览器默认的line-height为1.2。可以自定义 line-height 覆盖这个初始值，那么该怎样设置line-height呢？有以下5种方式：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>值</th>
+      <th style="text-align: left">描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>normal</td>
+      <td style="text-align: left">默认。设置合理的行间距。</td>
+    </tr>
+    <tr>
+      <td>number</td>
+      <td style="text-align: left">设置数字，此数字会与当前的字体尺寸相乘来设置行间距，即number为当前font-size的倍数。</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td style="text-align: left">设置固定的行间距。</td>
+    </tr>
+    <tr>
+      <td>%</td>
+      <td style="text-align: left">基于当前字体尺寸的百分比行间距。</td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td style="text-align: left">规定应该从父元素继承 line-height 属性的值。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>看起来如此简单~但是，<code>line-height</code>是个<strong>可继承</strong>属性，它的继承规则有那么一点点复杂……</p>
+
+<h2 id="section-3">继承</h2>
+<p>需要提前说明的是：<code>line-height</code>的大小与<code>font-size</code>息息相关，除了指定<code>line-height</code>为多少<code>px</code>，剩下的设置方式都是<strong>基于font-size算出来的</strong>。
+下面逐个讲一讲~</p>
+
+<ul>
+  <li>
+    <p>inherit
+这个其实没什么说的，继承父元素<code>line-height</code>的值，所以父元素的是多少就是多少。
+如果其后代元素不设置<code>line-height</code> 的话，也会是这个值。</p>
+  </li>
+  <li>
+    <p>length
+假设设置 line-height 为20px，那么该行的该行的行高就是20px，与 font-size 无关，不会随着 font-size 做相应比例的缩放。
+这个长度值（20px）会被后代元素继承，所有的后代元素会使用这个相同的、继承的 line-height (20px)，除非后代元素设定 line-height 。</p>
+  </li>
+  <li>
+    <p>百分比
+假设自身的 font-size 为16px，line-height 设为120%。那么其行高为：16 * 120% = 19.2px。即 line-height 是根据自身的 font-size 计算出来的。
+子元素会继承父元素的line-height，那么它继承的是什么呢，百分比（120%）？还是19.2px？
+答案是后者，19.2px，即父元素<code>line-height</code>计算后的最终值。</p>
+  </li>
+  <li>
+    <p>normal
+line-height 设置为 normal 的时候，行高取决于浏览器的解析，一般是1.2。
+与前面不同的是，line-height 设置为 normal 的元素，其子元素不再继承其line-height计算后的最终值，而是根据子元素自身的 font-size 进行计算。见下表~</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>element</th>
+          <th>font-size</th>
+          <th>line-height</th>
+          <th>计算后的lline-height</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>body</td>
+          <td>16px</td>
+          <td>normal</td>
+          <td>16px * 1.2 = 19.2px</td>
+        </tr>
+        <tr>
+          <td>h1</td>
+          <td>32px</td>
+          <td>normal</td>
+          <td>32px * 1.2 = 38.4px</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>可见，子元素随着自身 font-size 的大小而做相应比例的缩放。</p>
+  </li>
+  <li>
+    <p>纯数字
+如果既想要 normal 的灵活，又想设置一个自定义的值，那就要用 <strong><code>纯数字</code></strong> 啦~
+纯数字方式与 normal 唯一的不同，就是数值的大小，纯数字可以自己随意设定，而 normal 的值是浏览器决定的。</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>element</th>
+          <th>font-size</th>
+          <th>line-height</th>
+          <th>计算后的lline-height</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>body</td>
+          <td>16px</td>
+          <td>1.5</td>
+          <td>16px * 1.5 = 24px</td>
+        </tr>
+        <tr>
+          <td>h1</td>
+          <td>32px</td>
+          <td>1.5</td>
+          <td>32px * 1.5 = 48px</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>其后代元素会继承这个数值（比如 1.5），然后根据自身的 font-size 算出自身的line-height。</p>
+  </li>
+</ul>
+
+<p>总结如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>设置方式</th>
+      <th>line-height</th>
+      <th>计算后的line-height</th>
+      <th>子元素继承的line-height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>inherit</td>
+      <td>父元素的line-height值</td>
+      <td>不用计算</td>
+      <td>父元素的line-height值</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td>20px</td>
+      <td>不用计算</td>
+      <td>20px</td>
+    </tr>
+    <tr>
+      <td>%</td>
+      <td>120%</td>
+      <td>自身font-size (16px) * 120% = 19.2px</td>
+      <td>继承父元素计算后的line-height值 19.2px，而不是120%</td>
+    </tr>
+    <tr>
+      <td>normal</td>
+      <td>1.2</td>
+      <td>自身font-size (16px) * 1.2 = 19.2px</td>
+      <td>继承1.2，line-height = 自身font-size(32px) * 1.2 = 38.4px</td>
+    </tr>
+    <tr>
+      <td>纯数字</td>
+      <td>1.5</td>
+      <td>自身font-size (16px) * 1.2 = 19.2px</td>
+      <td>继承1.5，line-height = 自身font-size(32px) * 1.5 = 48px</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>那么，哪一种是最好的方式呢？
+一般来数，设置行高的值为 <strong><code>纯数字</code></strong> 是最推荐的方式，因为其会随着对应的 font-size 而缩放。</p>
+
+<hr />
+
+<p>这是对<code>line-height</code>的一点总结，欢迎小伙伴们拍砖哈~</p>
+
+<h2 id="section-4">参考</h2>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-height">MDN line-height</a></p>
+
+<p><a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html">深入了解css的行高Line Height属性</a></p>
+
+<p><a href="http://www.cnblogs.com/dolphinX/p/3236686.html">CSS行高——line-height</a></p>
+
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

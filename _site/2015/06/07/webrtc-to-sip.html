@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			WebRTC简介及其与SIP互通
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">WebRTC简介及其与SIP互通</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=webrtc" class="tag">webrtc</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-06-07</time></span>
+	</div>
+	<div class="markdown art-content">
+		<p>最近研究一下 <code>webrtc</code> ，看了几篇paper，之前也尝试运行验证了几个demo，现在把我的理解总结到这里。</p>
+
+<h2 id="webrtc">WebRTC</h2>
+
+<h3 id="section">简介</h3>
+
+<blockquote>
+  <p>WebRTC，名称源自网页实时通信（Web Real-Time Communication）的缩写，是一个支持网页浏览器进行实时语音对话或视频对话的技术，是谷歌2010年以6820万美元收购Global IP Solutions公司而获得的一项技术。</p>
+</blockquote>
+
+<p>这是百度百科上的介绍，维基百科也差不多。对完全小白来讲，可能不是很理解这句话。</p>
+
+<p>首先，<strong>什么是实时通信？</strong>
+举个直白的例子，我们平时打电话就是实时通信。现在有很多实时通信的软件，比如 <code>丁丁</code>、<code>有信</code>……这是手机app。PC客户端像<code>Xlite</code>、<code>Linphone</code>等等。这些客户端接入网络，注册到相应的服务器上就可以进行音频通信了，支持视频的还能进行视频通信。拿<code>Xlite</code>来说，它的信令机制采用的是sip协议。<code>SIP</code>协议是<code>IMS</code>网络广泛使用的信令协议，已经很成熟。两个uesr 通过<code>Xlite</code>客户端注册到<code>sip server</code>（如 Asterisk）上，就可以互相拨打对方的号码音视频通信了，不过就<code>Xlite</code>来说，语音通话是免费的，但是视频的话，是要支付money软件才提供视频功能的……</p>
+
+<p>其次，<strong>为什么要提出WebRTC？</strong>
+一直以来，用户如果想通过互联网进行实时通信，就需要安装软件，要么就得在浏览器中安装插件。<strong>WebRTC的宗旨是<code>不需用户安装任何插件</code>，直接使用<code>浏览器</code>就可以进行实时音视频通信。</strong>就是如果WebRTC实现了，我们打开浏览器，输入网址，登陆进去，拨打号码，就可以互相音视频了。不再需要安软件，也不需要安装额外的浏览器插件。Web版QQ大家都用过吧，现在还只能发发消息发发表情，如果引入WebRTC，那音视频传文件都不在话下，现在QQ客户端有的功能，通过网页访问都能体验，估计到时候都不愿意再装体积越来越大的QQ客户端了吧。</p>
+
+<p>最后，<strong>需要知道的内容</strong></p>
+
+<ul>
+  <li>WebRTC已经纳入HTML5标准</li>
+  <li>目前支持webrtc的浏览器有 <code>Chrome</code> <code>Firefox</code> <code>Opera</code>，<code>IE</code>不支持~</li>
+  <li>WebRTC没有指定具体的信令协议，具体的信令协议留给应用程序实现。</li>
+  <li>webRTC使用<code>JSEP</code>协议建立会话，什么是JSEP后面说</li>
+  <li>WebRTC采用<code>ICE</code>实现NAT穿越</li>
+  <li>WebRTC客户端之间可以进行点对点的媒体传输。</li>
+</ul>
+
+<h3 id="jsep">JSEP</h3>
+
+<blockquote>
+  <p>JSEP（JavaScript Session Establishment Protocol，JavaScript会话建立协议）是一个信令API，允许开发者构建更强大的应用程序以及增加在信令协议选择上的灵活性。</p>
+</blockquote>
+
+<p>建立会话最关键的就是媒体的协商，WebRTC虽然没有指定具体的信令协议，但是媒体协商采用了<code>SDP</code>协议。JSEP是干什么的呢，一方面提供接口如<code>createOffer()</code>供web应用程序调用生成<code>SDP</code>，另一方面提供<code>ICE</code>功能接口。这些功能都由浏览器实现，浏览器
+WebRTC传输信令（<code>offer/answer</code>）采用<code>Websocket</code>。
+需要说明的是，如果web应用程序不使用额外的信令协议，仅使用JSEP，两个WebRTC client <em>（同一个WebRTC client程序，两处登陆）</em> 之间也是可以建立链接的，即只要应用程序能解析用<code>WS</code>传递过来的<code>Offer/Answer</code>消息，提取出其中的<code>SDP</code>和<code>ICE</code>信息就可以了。</p>
+
+<p>github上<code>codelab</code>demo 就是不用其他信令协议，直接使用JSEP生成offer/answer信令，然后采用ws协议传输实现的。</p>
+
+<p>JSEP并不是信令协议，可以在JSEP的基础上引入SIP等信令协议，使WebRTC应用功能更加完备。</p>
+
+<h2 id="webrtcsip">WebRTC与SIP互通</h2>
+<p>要想让WebRTC与sip互通，要解决两个层面的问题：<strong>信令层</strong>和<strong>媒体层</strong>。
+两个网络使用的信令机制不同，所以要进行信令的转换，才能完成媒体的协商，建立会话。媒体层要完成编码的转换，以及rtp/srtp转换等功能。这里主要说项信令层面的互通。</p>
+
+<h3 id="section-1">信令互通方案</h3>
+<p>目前sip和webrtc信令上互通有两种解决方案：</p>
+
+<ul>
+  <li>用JavaScript实现sip协议栈，webrtc应用程序基于这个协议栈开发。这样webrtc client发出的信令就是sip信令，但一般采用websocket为信令传输协议。这样的webrtc client就可以直接注册到支持ws的sip server上了。
+<code>jssip</code> 、<code>sipml5</code> 都是这种解决方案。</li>
+  <li>通过转换网关实现协议的转换，从而互通。一个开源的网关项目就是 <code>webrtc2sip</code>。
+webrtc2sip是一个功能很完善的网关，既实现了信令层，也实现了媒体层，编码转换功能很强大，也可以直接当做媒体网关，用于编解码，沟通两端的媒体。</li>
+</ul>
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>

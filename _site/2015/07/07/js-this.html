@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- 
+	**
+	* Author:			梦禅
+	* Contact:			liulying@126.com
+	* Create Date:		2015.8.17
+	**
+	-->
+	<meta charset="UTF-8">
+	<title>
+		
+			JavaScript中的 this
+		
+	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="generator" content="Jekyll" />
+	<meta name="author" content="梦 禅" />
+	<meta name="descriptoin" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	
+	<link rel="stylesheet" href="../../../css/markdown.css" />
+	<link rel="stylesheet" href="../../../css/github-gist.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+	
+	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+	<script src="../../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../../js/yunlogo.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+	<div class="wrap">
+	<!-- 导航条部分 -->
+		<div class="nav-wrap">
+			<div id="logo-bg" class="blog-logo-bg">
+	    <canvas id="yugen-logo-canvas" width="380" height="220"></canvas>
+	    <canvas id="yugen-shadow-canvas" style="display:none;"></canvas>
+	</div>
+	<div class="blog-logo"><a href="/index.html"></a></div>
+	<script>
+		$(document).ready(function () {
+	        YugenLogo.initialize( {
+	            framerate: 60,
+
+	            width: 380,
+	            height: 220,
+
+	            colorSpeedFactor: 0.4,
+	            morphSpeedFactor: 0.4,
+	            introSpeedFactor: 2,
+	            outroSpeedFactor: 2,
+
+	            morphStrengthFactor: 0.8,
+
+	            morphBaseSpeedFactor: 0.2,
+	            normalOffsetFactor: 1.5,
+
+	            maxShapeRotation: 0.2,
+
+	            wordOffsetX: 0,
+	            wordOffsetY: 0,
+
+	            wordScale: 1,
+
+	            foregroundScaleX: 0.42,
+	            foregroundScaleY: 0.21,
+	            backgroundScaleX: 0.36,
+	            backgroundScaleY: 0.21,
+
+	            shadowAlpha: 0.1,
+
+	            shapeQuality: 9,
+
+	            containerID: "logo-bg",
+	            logoCanvasID: "yugen-logo-canvas",
+
+	            colors:[
+	                [new YugenLogo.util.Color(240, 240, 240), new YugenLogo.util.Color(0, 0, 0)],
+	                [new YugenLogo.util.Color(0, 0, 0), new YugenLogo.util.Color(240, 240, 240)]
+	            ],
+
+	            inputs: [
+	                YugenLogo.input.move,
+	                YugenLogo.input.press
+	            ],
+
+	            fallbackImages: [
+
+	            ]
+	        });
+	    });
+	</script>
+		<ul class="nav">
+
+    <li><a href="/index.html">首页</a></li>
+
+    <li><a href="/blog">文章</a></li>
+
+    <li><a href="/works.html">作品</a></li>
+
+    <li><a href="/about.html">关于</a></li>
+
+ </ul>
+		</div>
+	<!-- 主体部分 -->
+		<div class="main-wrap">
+			<div class="blog">
+<h2 class="post-title">JavaScript中的 this</h2>
+	<div class="tag-box">
+		
+		<a href="//all?tag=javascript" class="tag">javascript</a>
+		
+		<a href="//all?tag=前端" class="tag">前端</a>
+		
+		<span>(30人阅)</span>
+		<span><time pubdate="">2015-07-07</time></span>
+	</div>
+	<div class="markdown art-content">
+		<p>感觉上篇文章还是三四天前写的，看看日期已经10天了。。时间过的真快！赶紧补篇，js中的<code>this</code>是我学习了但一直没来得及总结的，今天就简要说说 <code>this</code> 吧~</p>
+
+<hr />
+
+<h3 id="this">this简述</h3>
+<p>每个函数在被调用时都会自动取得两个特殊的对象：<code>this</code> 和 <code>arguments</code>，<code>arguments</code> 是一个类数组对象，包含着传入函数中的所有参数， <code>this</code> 引用的是函数据以执行的环境对象。</p>
+
+<p><code>this</code> 对象是在<strong>运行时</strong>基于<strong>函数的执行环境</strong>绑定的，它可能是全局对象或者其他的某个对象，随着函数的执行环境不同，<code>this</code>的值也会不一样。但是总有一个原则，那就是</p>
+
+<blockquote>
+  <p><code>this</code> 指的是 调用函数的 那个对象。</p>
+</blockquote>
+
+<p>还有另一个原则：当没有明确的调用函数的那个对象时，<code>this</code>指向全局对象<code>global</code>，浏览器模式下就是<code>window</code>了。</p>
+
+<blockquote>
+  <p>By default, <code>this</code> refers to the global object.</p>
+</blockquote>
+
+<hr />
+
+<p>下面具体讲讲<code>this</code> 的指代原则。</p>
+
+<h3 id="this-1">this的指代原则</h3>
+
+<h4 id="section">1. 函数直接被调用</h4>
+<p>此时函数属于全局性调用，其<code>this</code>代表全局对象<code>global</code></p>
+
+<pre><code>var a = 5;
+function test() {
+console.log(this.a);
+}
+test(); // 5
+</code></pre>
+
+<p>注意下面这种情况：</p>
+
+<pre><code>function f1(){
+    console.log(this);
+    function f2(){
+        console.log(this);
+    }
+    f2();
+}
+f1();  // Window window
+</code></pre>
+
+<p>f2()输出的也是<code>window</code>，可见无论是在全局中直接被调用，还是内嵌在函数中被调用，只要是<strong>直接通过名字调用函数的</strong>，函数中的<code>this</code>在<strong>非严格模式下都是指向全局对象，而严格模式下就是undefined</strong></p>
+
+<h4 id="section-1">2. 函数作为对象的方法调用</h4>
+<p>此时<code>this</code>指向这个对象。</p>
+
+<pre><code>function test() {
+    console.log(this.a);
+}
+
+var obj = {};
+obj.a = 5;
+obj.m = test;
+obj.m(); // 5
+</code></pre>
+
+<h4 id="section-2">3. 函数作为构造函数调用</h4>
+<p>此时，<code>this</code>指向生成的新对象。</p>
+
+<pre><code>var a = 3; //全局变量a
+function Test() {
+    this.a = 5; // 对象属性a
+}
+
+var obj = new Test();
+console.log(obj.a); // 5, 不是3！
+</code></pre>
+
+<h4 id="this-2">4. 匿名函数中的this</h4>
+
+<blockquote>
+  <p>匿名函数的执行环境具有全局性，因此，其this对象通常指向window。</p>
+</blockquote>
+
+<pre><code>var name = 'The window';
+
+var obj = {
+    name: 'My object',
+    
+    getName: function() {
+        return function() {
+            return this.name;
+        };
+    }
+};
+
+console.log(obj.getName()()); // 'The window'
+</code></pre>
+
+<hr />
+
+<h3 id="this-3">设置this的值</h3>
+
+<h4 id="call--apply">1. call() / apply()</h4>
+<p>这两个方法的作用都是在特定的作用域中调用函数，从而设置了函数体内<code>this</code> 的值。
+<code>apply()</code> 方法接收两个参数：第一个参数是函数要运行的作用域，即对象。第二个参数是参数数组，既可以是Array的实例，也可以是<code>arguments</code>对象。<code>call()</code>和<code>apply()</code>的作用相同，二者唯一的差别就是接收参数的方式不同，即在使用<code>call()</code>方法时，传递给函数的参数必须逐个列举出来。
+通过例子看<code>call()</code>/<code>apply()</code>是如何改变<code>this</code>值的。</p>
+
+<pre><code>window.color = 'red';
+var o = {color: 'blue'};
+
+function sayColor() {
+    console.log(this.color);
+}
+sayColor.call(o); // blue
+
+sayColor.call(window); // red
+sayColor.call(this); // red
+sayColor(); // red
+</code></pre>
+
+<h4 id="bind">2. bind()</h4>
+<p>该方法创建一个函数的实例，其this的值会被绑定到传给<code>bind()</code>函数的值。创建的新函数无论在哪里调用，<code>this</code>的值都是固定的。</p>
+
+<pre><code>window.color = 'red';
+var o = {color: 'blue'};
+
+function sayColor() {
+    console.log(this.color);
+}
+var newSaycolor = sayColor.bind(o);
+newSayColor(); // blue，全局中调用，结果仍为blue
+</code></pre>
+
+<p>需要注意的是，支持<code>bind()</code>方法的浏览器有 IE9+ 、Firefox 4+ 、 Safari 5.1+ 、 Opera 12+ 和 Chrome。</p>
+
+<h3 id="eval">eval()</h3>
+<p>使用 <code>eval()</code> 方法时，<code>this</code> 指向哪里呢？
+答案很简单，看谁在调用 <code>eval()</code> 方法，<code>eval()</code>中的<code>this</code>就是调用者的执行环境中的 <code>this</code> 。</p>
+
+<hr />
+
+<p>这是我关于<code>this</code>的一点理解，欢迎大家拍砖~</p>
+
+<h3 id="section-3">参考文章：</h3>
+<p><a href="http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html">Javascript的this用法</a></p>
+
+<p><a href="http://www.ibm.com/developerworks/cn/web/1207_wangqf_jsthis/index.html">深入浅出 JavaScript 中的 this</a></p>
+
+<p><a href="http://www.cnblogs.com/justany/archive/2012/11/01/the_keyword_this_in_javascript.html">Javascript中this关键字详解</a></p>
+
+
+	</div>
+</div>
+<!-- <div class="comment-wrap">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+</div> -->
+		
+
+
+		</div>
+	<!-- comment -->
+		
+			<div class="comment-wrap">
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mengchan';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+				
+					<div id="recent_comments">
+    <h3>Recent Comments</h3>
+
+    <div class="comment_list">
+        <script type="text/javascript" src="http://mengchan.disqus.com/recent_comments_widget.js?num_items=6&hide_avatars=0&avatar_size=32&excerpt_length=200">
+        </script>
+    </div>
+</div>
+				
+			</div>
+		
+	</div>
+</div>
+<script src="../../../js/scroll.js"></script>
+
+
+	<div class="footer">
+	    <p> © 2015 Zen Jekyll Theme. Design by <a href="http://www.zhanxin.info/contact.html">梦禅</a></p>
+	</div>
+	<script src="../../../js/main.js"></script>
+	
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</body>
+</html>
