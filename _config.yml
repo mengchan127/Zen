@@ -2,7 +2,7 @@ paginate: 8
 paginate_path: "blog/page:num"
 markdown: kramdown
 
-baseurl: "/Zen"
+url: "http://sally127.github.io/Zen"
 
 title: "梦禅"
 
@@ -28,7 +28,7 @@ follow:
     url: "mailto:liulying@126.com"
   - class: fa-rss
     text: 订阅
-    url: "http://www.mousycoder.com/rss/"
+    url: ""
 
 author:
   name: "梦 禅"
