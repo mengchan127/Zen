@@ -863,3 +863,9 @@ html,body {
 #tag-posts .article-title {
   margin-bottom: 10px;
 }
+@media screen and (max-width: 480px) {
+  #tag-name {
+    margin-top: 15px;
+    padding: 0px 15px;
+  }
+}
