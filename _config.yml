@@ -8,13 +8,13 @@ title: "梦禅"
 
 nav:
   - text: "首页"
-    url: "/index.html"
+    url: "index.html"
   - text: "文章"
-    url: "/blog"
+    url: "blog"
   - text: "作品"
-    url: "/works.html"
+    url: "works.html"
   - text: "关于"
-    url: "/about.html"
+    url: "about.html"
     
 follow:
   - class: "fa-github-alt"
