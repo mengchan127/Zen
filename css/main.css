@@ -229,7 +229,7 @@ a,input,button,textarea {
     padding-top: 20px;
   }
   .container {
-    background: none;
+    background: #fdfdfd;
   }
   .logo-bg {
     display: none;
