@@ -683,12 +683,13 @@ a,input,button,textarea {
 .src-link:hover {
   color: #E66B6B;
 }
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 979px) {
   .works-wrap {
     padding-left:5%;
     padding-right:5%;
   }
   .work {
+    margin: 10px;
     -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.1),0 0 20px rgba(0,0,0,0.1);
     -moz-box-shadow: 0 0 3px rgba(0,0,0,0.1),0 0 20px rgba(0,0,0,0.1);
     -o-box-shadow: 0 0 3px rgba(0,0,0,0.1),0 0 20px rgba(0,0,0,0.1);
