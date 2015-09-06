@@ -28,11 +28,11 @@ follow:
     url: "mailto:liulying@126.com"
   - class: fa-rss
     text: 订阅
-    url: ""
+    url: "#"
 
 author:
   name: "梦 禅"
-  link: "http://sally127.github.io/Zen/about.html"
+  link: "http://mengchan.me/about.html"
   motto: "荣枯事过都成梦，悲喜不惊便是禅"
 
 introduce:
