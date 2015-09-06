@@ -6,17 +6,17 @@ navClass: nav
 {% for rpost in paginator.posts %}
 <article>
 	<h2 class="article-title">
-		<a href="{{ site.url }}{{ rpost.url }}" title="{{ rpost.title }}">{{ rpost.title }}</a>
+		<a href="..{{ rpost.url }}" title="{{ rpost.title }}">{{ rpost.title }}</a>
 	</h2>
 	<div class="tag-box">
 		{% for tag in rpost.tags %}
-		<a href="{{ site.url }}/all.html?tag={{ tag }}" class="tag">{{ tag }}</a>
+		<a href="../all.html?tag={{ tag }}" class="tag">{{ tag }}</a>
 		{% endfor %}
 	</div>
 	<p class="article-descrip">{{ rpost.description }}</p>
 	<div class="pannel-box">
 		<span class="pub-date">发表于 {{ rpost.date | date_to_utc | date: "%Y年%m月%d日" }}</span>
-		<a href="{{ site.url }}{{ rpost.url }}" class="read-more" title="查看全文">More</a>
+		<a href="..{{ rpost.url }}" class="read-more" title="查看全文">More</a>
 		<!-- <span class="view-count">(30人已阅)</span> -->
 	</div>
 </article>
@@ -24,13 +24,13 @@ navClass: nav
 <div class="pagination">
 {% if paginator.previous_page %}
 	{% if paginator.previous_page == 1 %}
-		<a href="{{ site.url }}/blog" class="page-btn previous">←&nbsp;&nbsp; 上一页</a>
+		<a href="../blog" class="page-btn previous">←&nbsp;&nbsp; 上一页</a>
 	{% else %}
-		<a href="{{ site.url }}/blog/page{{ paginator.previous_page }}" class="page-btn previous">←&nbsp;&nbsp; 上一页</a>
+		<a href="../blog/page{{ paginator.previous_page }}" class="page-btn previous">←&nbsp;&nbsp; 上一页</a>
 	{% endif %}
 {% endif %}
 	<span class="pagenum">{{ paginator.page }}/{{ paginator.total_pages }}</span>
 {% if paginator.next_page %}
-	<a href="{{ site.url }}/blog/page{{ paginator.next_page }}" class="page-btn next">下一页 &nbsp;&nbsp;→</a>
+	<a href="../blog/page{{ paginator.next_page }}" class="page-btn next">下一页 &nbsp;&nbsp;→</a>
 {% endif %}
 </div>
