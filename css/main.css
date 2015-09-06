@@ -814,6 +814,7 @@ a,input,button,textarea {
 }
 .intro-wrap a {
   color: #4d4d4d;
+  text-decoration: underline;
   font-weight: 600;
   -webkit-transition: color .3s ease-in-out;
   -moz-transition: color .3s ease-in-out;
@@ -841,9 +842,6 @@ a,input,button,textarea {
   }
   .intro-wrap {
     margin-left: 0;
-  }
-  .intro-wrap li a {
-    text-decoration: underline;
   }
 }
 
