@@ -53,7 +53,7 @@ siteinfo:
 		<ul>
 			{% for contact in page.contacts %}
 
-			<li>{{ contact.name }}<a href="{{ contact.url }}" target="_blank">{{ contact.text }}</a></li>
+			<li>{{ contact.name }}<a href="{{ contact.url }}">{{ contact.text }}</a></li>
 			{% endfor %}
 		</ul>
 		{% endif %}
