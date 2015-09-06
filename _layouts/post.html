@@ -10,7 +10,7 @@ isRecentComment: true
 <h2 class="post-title">{{ page.title }}</h2>
 	<div class="tag-box">
 		{% for tag in page.tags %}
-		<a href="{{ site.baseurl }}/all?tag={{ tag }}" class="tag">{{ tag }}</a>
+		<a href="{{ site.url }}/all?tag={{ tag }}" class="tag">{{ tag }}</a>
 		{% endfor %}
 		<!-- <span>(30人阅)</span> -->
 		<span><time pubdate="{{ rpost.date | date_to_utc | date: '%Y-%m-%d' }}">{{ page.date | date_to_utc | date: "%Y-%m-%d" }}</time></span>
