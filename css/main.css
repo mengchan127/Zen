@@ -842,7 +842,7 @@ a,input,button,textarea {
   .intro-wrap {
     margin-left: 0;
   }
-  .intro-wrap a {
+  .intro-wrap li a {
     text-decoration: underline;
   }
 }
