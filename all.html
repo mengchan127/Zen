@@ -22,7 +22,7 @@ title: All Posts
 <script src="{{ site.url }}/js/jquery.query.js"></script>
 <script>
 	$(document).ready(function () {
-		var dataStr = '{ {% for tag in site.tags %}{% if tag[0] != site.tags.first[0] %},{% endif %}"{{ tag[0] }}":[{% for post in tag[1] %}{% if post != tag[1].first %},{% endif %}{"url":"{{post.url}}", "title":"{{post.title}}", "date":"{{post.date | date:"%Y年%m月%d日"}}","descrip":"{{post.description}}"}{% endfor %}]{% endfor %} }';
+		var dataStr = '{ {% for tag in site.tags %}{% if tag[0] != site.tags.first[0] %},{% endif %}"{{ tag[0] }}":[{% for post in tag[1] %}{% if post != tag[1].first %},{% endif %}{"url":"{{site.url}}{{post.url}}", "title":"{{post.title}}", "date":"{{post.date | date:"%Y年%m月%d日"}}","descrip":"{{post.description}}"}{% endfor %}]{% endfor %} }';
 	    var data = $.parseJSON(dataStr);
 	    var curTag = $.query.get("tag");
 	    var archieves = data[curTag]; 
