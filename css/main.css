@@ -228,6 +228,9 @@ a,input,button,textarea {
     top: 0;
     padding-top: 20px;
   }
+  .container {
+    background: none;
+  }
   .logo-bg {
     display: none;
   }
