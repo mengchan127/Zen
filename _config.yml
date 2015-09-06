@@ -28,7 +28,7 @@ follow:
     url: "mailto:liulying@126.com"
   - class: fa-rss
     text: 订阅
-    url: "#"
+    url: "javascript:void(0);"
 
 author:
   name: "梦 禅"
