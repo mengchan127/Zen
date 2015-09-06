@@ -28,7 +28,6 @@
 	{% if page.isPost %}
 	<link rel="stylesheet" href="{{ site.url }}/css/markdown.css" />
 	<link rel="stylesheet" href="{{ site.url }}/css/github-gist.css" />
-	<script>{{ site.url }}/js/highlight.pack.js</script>
 	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script> -->
 	{% endif %}
 	<!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
@@ -43,6 +42,7 @@
 	</div>
 	<script src="{{ site.url }}/js/main.js"></script>
 	{% if page.isPost %}
+	<script src="{{ site.url }}/js/highlight.pack.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	{% endif %}
 </body>
