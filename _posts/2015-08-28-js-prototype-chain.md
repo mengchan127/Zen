@@ -114,8 +114,8 @@ F.prototype.b = function (){console.log('F.prototype');};
 
 
   [1]: http://segmentfault.com/q/1010000003503459
-  [2]: /blog/blog_imgs/7.png
-  [3]: /blog/blog_imgs/8.png
-  [4]: /blog/blog_imgs/10.png
-  [5]: /blog/blog_imgs/9.png
+  [2]: {{ site.url }}/blog/blog_imgs/7.png
+  [3]: {{ site.url }}/blog/blog_imgs/8.png
+  [4]: {{ site.url }}/blog/blog_imgs/10.png
+  [5]: {{ site.url }}/blog/blog_imgs/9.png
   [6]: http://segmentfault.com/q/1010000002736664
