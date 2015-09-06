@@ -839,6 +839,9 @@ html,body {
   .intro-wrap {
     margin-left: 0;
   }
+  .intro-wrap a {
+    text-decoration: underline;
+  }
 }
 
 /* post */
