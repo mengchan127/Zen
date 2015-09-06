@@ -131,9 +131,9 @@ line-height 设置为 normal 的时候，行高取决于浏览器的解析，一
 
 
   [1]: http://segmentfault.com/a/1190000003007361
-  [2]: /blog/blog_imgs/4.png
-  [3]: /blog/blog_imgs/5.png
-  [4]: /blog/blog_imgs/6.png
+  [2]: {{ site.url }}/blog/blog_imgs/4.png
+  [3]: {{ site.url }}/blog/blog_imgs/5.png
+  [4]: {{ site.url }}/blog/blog_imgs/6.png
   [6]: https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-height
   [7]: http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html
   [8]: http://www.cnblogs.com/dolphinX/p/3236686.html
