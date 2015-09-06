@@ -22,6 +22,9 @@ ins,a { text-decoration:none; }
 html,body {
   height: 100%;
 }
+a,input,button,textarea {
+  outline: none;
+}
 
 /****** common *******/
 .container {
