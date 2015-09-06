@@ -1,1 +1,41 @@
+paginate: 8
+paginate_path: "blog/page:num"
+markdown: kramdown
+
 baseurl: "/zen"
+
+title: "梦禅"
+
+nav:
+  - text: "首页"
+    url: "/index.html"
+  - text: "文章"
+    url: "/blog"
+  - text: "作品"
+    url: "/works.html"
+  - text: "关于"
+    url: "/about.html"
+    
+follow:
+  - class: "fa-github-alt"
+    text: GitHub
+    url: "http://github.com/sally127"
+  - class: fa-weibo
+    text: 微博
+    url: "http://weibo.com/uc270506566"
+  - class: fa-envelope
+    text: Email
+    url: "mailto:liulying@126.com"
+  - class: fa-rss
+    text: 订阅
+    url: "http://www.mousycoder.com/rss/"
+
+author:
+  name: "梦 禅"
+  link: "http://sally127.github.io/Zen/about.html"
+  motto: "荣枯事过都成梦，悲喜不惊便是禅"
+
+introduce:
+  - content: "你好，我是梦禅"
+  - content: "90后，热爱前端，梦想成为一名优秀的前端工程师"
+  - content: "女汉子，水瓶座，爱运动，爱美食，爱生活，爱一切美好的事物"
