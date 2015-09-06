@@ -6,7 +6,7 @@ navClass: nav
 {% for rpost in paginator.posts %}
 <article>
 	<h2 class="article-title">
-		<a href="{{ rpost.url }}" title="{{ rpost.title }}">{{ rpost.title }}</a>
+		<a href="{{ site.url }}{{ rpost.url }}" title="{{ rpost.title }}">{{ rpost.title }}</a>
 	</h2>
 	<div class="tag-box">
 		{% for tag in rpost.tags %}
@@ -16,7 +16,7 @@ navClass: nav
 	<p class="article-descrip">{{ rpost.description }}</p>
 	<div class="pannel-box">
 		<span class="pub-date">发表于 {{ rpost.date | date_to_utc | date: "%Y年%m月%d日" }}</span>
-		<a href="{{ rpost.url }}" class="read-more" title="查看全文">More</a>
+		<a href="{{ site.url }}{{ rpost.url }}" class="read-more" title="查看全文">More</a>
 		<!-- <span class="view-count">(30人已阅)</span> -->
 	</div>
 </article>
