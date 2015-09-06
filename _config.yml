@@ -2,7 +2,7 @@ paginate: 8
 paginate_path: "blog/page:num"
 markdown: kramdown
 
-url: "/Zen"
+url: "http://sally127.github.io/Zen"
 
 title: "梦禅"
 
@@ -15,7 +15,7 @@ nav:
     url: "works.html"
   - text: "关于"
     url: "about.html"
-    
+
 follow:
   - class: "fa-github-alt"
     text: GitHub
