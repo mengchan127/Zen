@@ -1,5 +1,6 @@
 ---
 layout: post
+show: true
 title: JavaScript 检测数组
 description: JS的经典问题之一就是“检测一个对象是不是数组”，本文总结了3种检测方法。
 tags:

@@ -1,5 +1,6 @@
 ---
 layout: post
+show: true
 title: 为function添加值为function的属性
 description: 今天在某个js交流群里看到这样一个问题——亲们，如果我定义一个 function A() { } 可以给这个函数添加一个方法吗？
 tags:

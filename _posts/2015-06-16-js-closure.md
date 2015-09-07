@@ -1,5 +1,6 @@
 ---
 layout: post
+show: true
 title: JavaScript 闭包
 description: 作为一个初学者，学习一个新的概念无非就是知道 <b>“它是什么”、“什么原理”、“怎样创建”、“有什么用”、“怎么用”</b>，这篇文章就从这几个角度介绍闭包，欢迎小伙伴们拍砖~
 tags:

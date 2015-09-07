@@ -5,6 +5,7 @@ description: 原型是一个对象。<strong>所有对象都有原型。</strong
 tags: 
   - javascript
   - 前端
+show: true
 ---
 
 今天研究了一下js的原型，把自己的理解写到这里，如有不正确的地方，还望指出，在此先谢过啦~

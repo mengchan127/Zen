@@ -1,5 +1,6 @@
 ---
 layout: post
+show: true
 title: ECMAScript各版本简介及特性
 description: 今天跟一位同学交流，她说面试的时候被问到“ECMAScript有哪些版本，他们之间各有什么区别？” 想想ECMAScript版本的问题还真没有考虑过，只知道最新的6，之前的5。本着了解ECMAScript历史的心态，查了查资料，总结如下~不足之处，还请指正~
 tags:

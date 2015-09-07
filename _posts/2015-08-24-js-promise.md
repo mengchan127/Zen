@@ -1,5 +1,6 @@
 ---
 layout: post
+show: true
 title: 【转载】JavaScript Promise启示录
 description: 前段时间频频看到<b>Promise</b>这个词，今天发现腾讯AlloyTeam写得这篇很赞，遂转之。
 tags: 

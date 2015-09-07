@@ -1,6 +1,7 @@
 ---
 layout: post
 title: WebRTC简介及其与SIP互通
+show: true
 description:  WebRTC，名称源自网页实时通信（Web Real-Time Communication）的缩写，是一个支持网页浏览器进行实时语音对话或视频对话的技术，是谷歌2010年以6820万美元收购Global IP Solutions公司而获得的一项技术。
 tags: 
   - webrtc

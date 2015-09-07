@@ -1,5 +1,6 @@
 ---
 layout: post
+show: true
 title: 小角度看JS原型链
 description: 在解题之前，先再说说 原型、原型链，以及 Function 和 Object 的关系，这也是本文的重点。
 tags:
