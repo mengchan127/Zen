@@ -4,7 +4,7 @@ navClass: nav
 ---
 
 {% for rpost in paginator.posts %}
-{% if rpost.isHide != true %}
+{% if !rpost.isHide %}
 <article>
 	<h2 class="article-title">
 		<a href="{{ site.url }}{{ rpost.url }}" title="{{ rpost.title }}">{{ rpost.title }}</a>
