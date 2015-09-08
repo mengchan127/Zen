@@ -10,7 +10,7 @@ intros:
   - “梦禅”二字源于“荣枯事过都成梦，悲喜不惊便是禅”，这是《欢乐喜剧人》里高晓攀说的，其实原诗是“荣枯事过都成梦，忧喜心忘便是禅”，但我更喜欢「悲喜不惊」。
   - 作为一枚女汉子，我喜欢运动，跑步，快乐踏板，喜欢旅行，爬山、看海 or 如画风景中静静发呆……
   - 作为一枚吃货，我喜欢吃美食，也喜欢捣鼓美食，如果你也爱美食，欢迎交流。
-  - 作为一名在读研究生，2016年5月毕业，目前<span>求职中</span>，希望找一份<span>#前端工程师#</span>的工作，<a href="http://mengchan.me/2015/09/07/resume.html" id="cv-link">戳我看简历咯</a>
+  - 作为一名在读研究生，2016年5月毕业，目前<span>求职中</span>，希望找一份<span>#前端工程师#</span>的工作，<a href="http://mengchan.me/2015/09/07/resume.html" target="_blank" id="cv-link">戳我看简历咯</a>
 
 contacts: 
   - name: 邮箱：
@@ -53,7 +53,7 @@ siteinfo:
 		<ul>
 			{% for contact in page.contacts %}
 
-			<li>{{ contact.name }}<a href="{{ contact.url }}">{{ contact.text }}</a></li>
+			<li>{{ contact.name }}<a href="{{ contact.url }}" target="_blank">{{ contact.text }}</a></li>
 			{% endfor %}
 		</ul>
 		{% endif %}
