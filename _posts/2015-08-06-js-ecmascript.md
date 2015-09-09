@@ -65,35 +65,26 @@ S6是继ES5之后的一次主要改进，语言规范由ES5.1时代的245页扩�
 
 移步下面三篇文章~
 
-- [ECMAScript5 Object的新属性方法][1]
-- [ECMAScript5 Array新增方法][2]
-- [ECMAScript5的其它新特性][3]
+- <a href="http://www.cnblogs.com/dolphinX/p/3348467.html" target="_blank">ECMAScript5 Object的新属性方法</a>
+- <a href="http://www.cnblogs.com/dolphinX/p/3353868.html" target="_blank">ECMAScript5 Array新增方法</a>
+- <a href="http://www.cnblogs.com/dolphinX/p/3354319.html" target="_blank">ECMAScript5的其它新特性</a>
 
 ##ECMAScript 6新特性及代码示例
 
 移步这里~
-[ECMAScript 6 — New Features: Overview & Comparison][4]
+<a href="http://es6-features.org/#Constants" target="_blank">ECMAScript 6 — New Features: Overview & Comparison</a>
 
-新增特性的兼容性看这里 [http://kangax.github.io/compat-table/es6/][5]
+新增特性的兼容性看这里 <a href="http://kangax.github.io/compat-table/es6/" taregt="_blank">http://kangax.github.io/compat-table/es6/</a>
 
 ---
 
 ##补充
 
-- [ECMAScript 6新特性介绍][6]
-- [ES6中非常实用的新特性介绍][7]
+- <a href="http://segmentfault.com/a/1190000002930417" target="_blank">ECMAScript 6新特性介绍</a>
+- <a href="http://segmentfault.com/a/1190000003492656" target="_blank">ES6中非常实用的新特性介绍</a>
 
 ---
 
 ##参考文章：
-[[译]ECMAScript:ES.next和ES6以及ES Harmony之间的区别][8]
+<a href="http://www.cnblogs.com/ziyunfei/archive/2012/09/24/2699065.html" target="_blank">[译]ECMAScript:ES.next和ES6以及ES Harmony之间的区别</a>
 
-
-  [1]: http://www.cnblogs.com/dolphinX/p/3348467.html
-  [2]: http://www.cnblogs.com/dolphinX/p/3353868.html
-  [3]: http://www.cnblogs.com/dolphinX/p/3354319.html
-  [4]: http://es6-features.org/#Constants
-  [5]: http://kangax.github.io/compat-table/es6/
-  [6]: http://segmentfault.com/a/1190000002930417
-  [7]: http://segmentfault.com/a/1190000003492656
-  [8]: http://www.cnblogs.com/ziyunfei/archive/2012/09/24/2699065.html

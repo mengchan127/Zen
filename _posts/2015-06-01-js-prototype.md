@@ -202,11 +202,7 @@ console.log($.trim(" ABC "));
 
 ###参考资料
 
- - [理解JavaScript原型][1]
- - [深入理解javascript原型和闭包（1）——一切都是对象][2]
- - [JavaScript探秘：强大的原型和原型链][3]
+ - <a href="http://blog.jobbole.com/9648/" target="_blank">理解JavaScript原型</a>
+ - <a href="http://www.cnblogs.com/wangfupeng1988/p/3977987.html" target="_blank">深入理解javascript原型和闭包（1）——一切都是对象</a>
+ - <a href="http://www.nowamagic.net/librarys/veda/detail/1648" target="_blank">JavaScript探秘：强大的原型和原型链</a>
 
-
-  [1]: http://blog.jobbole.com/9648/
-  [2]: http://www.cnblogs.com/wangfupeng1988/p/3977987.html
-  [3]: http://www.nowamagic.net/librarys/veda/detail/1648

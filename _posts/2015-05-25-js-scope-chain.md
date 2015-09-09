@@ -82,10 +82,6 @@ JS的语法风格和 C/C++ 类似, 但作用域的实现却和 C/C++ 不同，�
 ##参考资料
 - 《js高级程序设计》 P73  4.2 执行环境及作用域
 
-- [鸟哥：JavaScript作用域原理][1]
+- <a href="http://www.laruence.com/2009/05/28/863.html" target="_blank">鸟哥：JavaScript作用域原理</a>
 
-- [JavaScript 开发进阶：理解 JavaScript 作用域和作用域链][2]
-
-
-  [1]: http://www.laruence.com/2009/05/28/863.html
-  [2]: http://www.cnblogs.com/lhb25/archive/2011/09/06/javascript-scope-chain.html
+- <a href="http://www.cnblogs.com/lhb25/archive/2011/09/06/javascript-scope-chain.html" target="_blank">JavaScript 开发进阶：理解 JavaScript 作用域和作用域链</a>

@@ -10,11 +10,12 @@ tags:
 
 看了《JS高级程序设计》和下面几篇文章，小总结下JS闭包~
 
-- [学习Javascript闭包（Closure）][1]
-- [javascript的闭包][2]
-- [JavaScript 闭包深入理解(closure)][3]
-- [理解 Javascript 的闭包][4]
-- [JavaScript 中的闭包][5]
+- <a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank">学习Javascript闭包（Closure）</a>
+- <a href="http://www.cnblogs.com/rubylouvre/archive/2009/07/24/1530074.html" target="_blank">javascript的闭包</a>
+- <a href="http://www.jb51.net/article/18303.htm" target="_blank">JavaScript 闭包深入理解(closure)</a>
+- <a href="http://www.oschina.net/question/28_41112" target="_blank">理解 Javascript 的闭包</a>
+- <a href="http://segmentfault.com/a/1190000002805295" target="_blank">JavaScript 中的闭包</a>
+
 
 作为一个初学者，学习一个新的概念无非就是知道 **“它是什么”、“什么原理”、“怎样创建”、“有什么用”、“怎么用”**，这篇文章就从这几个角度介绍闭包，欢迎小伙伴们拍砖~
 
@@ -310,8 +311,4 @@ Current cursor is at 5
 
 
 
-  [1]: http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html
-  [2]: http://www.cnblogs.com/rubylouvre/archive/2009/07/24/1530074.html
-  [3]: http://www.jb51.net/article/18303.htm
-  [4]: http://www.oschina.net/question/28_41112
-  [5]: http://segmentfault.com/a/1190000002805295
+ 

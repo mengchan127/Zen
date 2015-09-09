@@ -76,7 +76,7 @@ A.use()中的this是`function A()`，这也符合this的使用规则:
 
 ---
 
-我在写[《JavaScript原型》][1]里面摘抄过下面这段：
+我在写 <a href="http://segmentfault.com/a/1190000002867132" target="_blank">《JavaScript原型》</a> 里面摘抄过下面这段：
 
 在jQuery源码中，“jQuery”或者“$”，这个变量其实是一个函数，可以用 `typeof` 验证一下。
 
@@ -92,5 +92,3 @@ console.log($.trim(" ABC ")); // ABC
 要习惯的把js中的一切看作对象，只要是对象，就是属性的集合，属性是键值对的形式。
 
 当时只是记住了可以这样写，今天算是真的明白了 ：）
-
-  [1]: http://segmentfault.com/a/1190000002867132

@@ -11,7 +11,7 @@ tags:
 
 ##前言
 
-在 segmentfault 上看到这样一道[题目][1]：
+在 segmentfault 上看到这样一个：<a href="http://segmentfault.com/q/1010000003503459" target="_blank">问题</a>
 
 ~~~
 var F = function(){};
@@ -111,12 +111,10 @@ F.prototype.b = function (){console.log('F.prototype');};
 愿本文能带给坚持看完的你一些收获~  ^_^
 
 ##参考
-[js 原型的问题 Object 和 Function 到底是什么关系？—— 高票答案][6]
+<a href="http://segmentfault.com/q/1010000002736664" target="_blank">js 原型的问题 Object 和 Function 到底是什么关系？—— 高票答案</a>
 
 
-  [1]: http://segmentfault.com/q/1010000003503459
   [2]: {{ site.url }}/blog/blog_imgs/7.png
   [3]: {{ site.url }}/blog/blog_imgs/8.png
   [4]: {{ site.url }}/blog/blog_imgs/10.png
   [5]: {{ site.url }}/blog/blog_imgs/9.png
-  [6]: http://segmentfault.com/q/1010000002736664

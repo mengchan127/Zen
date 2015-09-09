@@ -8,7 +8,7 @@ tags:
   - 前端
 ---
 
-又已经快十天没有写文章了，一周一篇其实好艰难的说……本来想接着上篇 [事件（上篇）][1] 总结事件类型的，可是看完之后整理下还是有点乱，就一直拖着没写……实在是不能再拖下去了，今天就简单说说CSS中我们常用但又不一定真正了解的`line-height`属性。
+又已经快十天没有写文章了，一周一篇其实好艰难的说……本来想接着上篇 <a href="http://mengchan.me/2015/07/21/js-event.html" target="_blank">事件（上篇）</a> 总结事件类型的，可是看完之后整理下还是有点乱，就一直拖着没写……实在是不能再拖下去了，今天就简单说说CSS中我们常用但又不一定真正了解的`line-height`属性。
 
 ##基本概念
 
@@ -124,18 +124,15 @@ line-height 设置为 normal 的时候，行高取决于浏览器的解析，一
 
 
 ##参考
-[MDN line-height][6]
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-height" targte="_blank">MDN line-height</a>
 
-[深入了解css的行高Line Height属性][7]
+<a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html" target="_blank">深入了解css的行高Line Height属性</a>
 
-[CSS行高——line-height][8]
+<a href="http://www.cnblogs.com/dolphinX/p/3236686.html" target="_blank">CSS行高——line-height</a>
 
 
-  [1]: http://segmentfault.com/a/1190000003007361
+ 
   [2]: {{ site.url }}/blog/blog_imgs/4.png
   [3]: {{ site.url }}/blog/blog_imgs/5.png
   [4]: {{ site.url }}/blog/blog_imgs/6.png
-  [6]: https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-height
-  [7]: http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html
-  [8]: http://www.cnblogs.com/dolphinX/p/3236686.html
-  [9]: http://www.cnblogs.com/leejersey/p/3662612.html
+  
