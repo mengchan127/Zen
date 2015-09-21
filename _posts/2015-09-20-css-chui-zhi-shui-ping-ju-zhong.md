@@ -339,7 +339,7 @@ html,body{
 这里的"three"指的是left, width, right。如果left、right和width都不为auto，同时margin-left和margin-right都是auto，除非特别情况，它们俩就是相等的，而这个例子中不在特殊情况之列，因此两者平分，此时达到了水平居中。而对于垂直方向的margin的auto值的计算，标准中也有如下两句话，跟水平方向的同理(这里的“three”指的是“top, height, bottom”)：
 
 >the used values of the vertical dimensions must satisfy this constraint: 'top' + 'margin-top' + 'border-top-width' + 'padding-top' + 'height' + 'padding-bottom' + 'border-bottom-width' + 'margin-bottom' + 'bottom' = height of containing block
-
+>
 >if none of the three are 'auto': If both 'margin-top' and 'margin-bottom' are 'auto', solve the equation under the extra constraint that the two margins get equal values.
 
 垂直方向也就因此也居中了。
