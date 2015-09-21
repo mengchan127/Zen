@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  【转载】解读CSS布局之-水平垂直居中
-description: 
-		对一个元素水平垂直居中，在我们的工作中是会经常遇到的，也是CSS布局中很重要的一部分，本文就来讲讲CSS水平垂直居中的一些方法。由于我们大搜车的日常工作中已经不再需要理会低版本IE，所以本文所贴出的方法，是没有去考虑IE的……
+description: 对一个元素水平垂直居中，在我们的工作中是会经常遇到的，也是CSS布局中很重要的一部分，本文就来讲讲CSS水平垂直居中的一些方法。由于我们大搜车的日常工作中已经不再需要理会低版本IE，所以本文所贴出的方法，是没有去考虑IE的……
 tags: 
   - css
   - 前端
@@ -798,9 +797,16 @@ button{
 
 **（本文完）** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  by**<a href="http://f2e.souche.com/blog/author/yebo/" target="_blank">覃业博</a>**
 
+---
 
+附上大概只有自己能看懂的总结图一张~
+
+![img][4]
+
+get 的其他技能就是 <a href="http://www.w3school.com.cn/cssref/pr_background-clip.asp" target="_blank">background-clip</a>、 <a href="http://www.qianduan.net/calc-at-at-at-page-intelligent-layout/" target="_blank">calc()</a>
 
 
 [1]: {{ site.url }}/blog/blog_imgs/11.png
 [2]: {{ site.url }}/blog/blog_imgs/12.png
 [3]: {{ site.url }}/blog/blog_imgs/13.png
+[4]: {{ site.url }}/blog/blog_imgs/14.png
