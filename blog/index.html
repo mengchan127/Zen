@@ -7,7 +7,7 @@ navClass: nav
 {% if rpost.show %}
 <article>
 	<h2 class="article-title">
-		<a href="{{ site.url }}{{ rpost.url }}" title="{{ rpost.title }}">{{ rpost.title }}</a>
+		<a href="{{ site.url }}{{ rpost.url }}" title="{{ rpost.title }}" onclick="_htm.push(['_trackEvent','ToNote','click','{{rpost.url}}'])">{{ rpost.title }}</a>
 	</h2>
 	<div class="tag-box">
 		{% for tag in rpost.tags %}
