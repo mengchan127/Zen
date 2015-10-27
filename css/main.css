@@ -676,6 +676,7 @@ a,input,button,textarea {
 .work-descrip p {
   color: #555;
   width: 200px;
+  word-break: break-all;
 }
 .work-descrip span {
   color: #E66B6B;
