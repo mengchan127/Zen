@@ -2,7 +2,7 @@
 layout: post
 show: true
 title: Day-Reading 01
-description: 今天阅读的 good blogs, 《10段代码打通js学习的任督二脉》
+description: 今天阅读的 good blogs, 《10段代码打通js学习的任督二脉》、《浅谈 JS 创建对象的 8 种模式》
 tags:
   - day-reading
   - 前端
