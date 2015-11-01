@@ -19,7 +19,6 @@ tags:
 
 <h4><a href="http://segmentfault.com/a/1190000003862596" target="_blank">浅谈 JS 创建对象的 8 种模式</a></h4>
 
----
 
 <h2>10.27</h2>
 
@@ -29,3 +28,6 @@ tags:
 
 <h4><a href="http://overapi.com/" target="_blank">史上最全的开发人员在线速查手册（工具）</a></h4>
 <h4><a href="http://quilljs.com/" target="_blank">开源富文本编辑器 Quill（工具）</a></h4>
+
+<h3>10.28</h3>
+<h4><a href="http://www.awesomes.cn/repo/ksky521/nodeppt" target="_blank">nodePPT--这可能是迄今为止最好的网页版PPT</a></h4>
