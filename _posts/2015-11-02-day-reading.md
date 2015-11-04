@@ -1,7 +1,7 @@
 ---
 layout: post
 show: true
-title: Day-Reading 01
+title: Day-Reading 02
 description: requestAnimationFrame、
 tags:
   - day-reading
