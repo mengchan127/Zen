@@ -25,7 +25,7 @@ follow:
     url: "http://weibo.com/uc270506566"
   - class: fa-envelope
     text: Email
-    url: "mailto:liulying@126.com"
+    url: ""
   - class: fa-rss
     text: 订阅
     url: "javascript:void(0);"
